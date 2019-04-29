@@ -1,0 +1,75 @@
+.list-body {
+    margin-bottom: $l-size;
+
+    @media (min-width: $desktop-breakpoint) {
+        margin-bottom: $xl-size;
+    }
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    background: $grey-light;
+    padding: $s-size $m-size;
+    color: $grey;
+    border: solid 1px darken($grey-light, 7%);
+    font-size: $font-size-l;
+}
+
+.list-item {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    border: solid 1px darken($grey-light, 7%);
+    border-top: none;
+    color: $dark-grey;
+    padding: $s-size;
+    background: none;
+    transition: background 0.5s ease;
+    cursor: point;
+
+
+    &:hover {
+        background: $grey-light;
+    }
+
+    @media (min-width: $desktop-breakpoint) {
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.list-item--message {
+    align-items: center;
+    justify-content: center;
+    color: $grey;
+    padding: $m-size;
+
+    &:hover {
+        background: none;
+    }
+}
+
+.list-item__title {
+    margin: 0;
+    margin-bottom: $s-size;
+    word-break: break-all;
+    @media (min-width: $desktop-breakpoint) {
+        padding-right: $l-size;
+    }
+}
+
+.list-item__subtitle {
+    margin: 0;
+    color: $grey;
+    font-size: $font-size-s;
+}
+
+.list-item__amount {
+    margin: $s-size 0 0 0; 
+
+    @media (min-width: $desktop-breakpoint) {
+        margin: 0; 
+    }
+}

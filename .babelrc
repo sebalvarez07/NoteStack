@@ -1,0 +1,11 @@
+{
+    "presets": [
+        "@babel/preset-env", 
+        "@babel/preset-react"
+    ],
+    "plugins": [
+        // For automatic binding to work, must make class methods using arrow functions
+        "@babel/plugin-proposal-class-properties",      // Allows us to use automatic binding in React classes as well as declare instance variables without constructor declaration
+        "@babel/plugin-proposal-object-rest-spread"     // Object spread operator use
+    ]
+}

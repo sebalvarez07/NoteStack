@@ -1,0 +1,35 @@
+.btn {
+    padding: $s-size;
+    font-size: $font-size-l;
+    border: none;
+    font-weight: 300;
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1;
+}
+
+.btn--blue {
+    background: $blue;
+    color: $white;
+    transition: background 0.5s ease;
+
+    &:hover {
+        background: fade-out($blue, 0.2);
+    }
+}
+
+.btn--link {
+    background: none;
+    color: $white;
+}
+
+.btn--grey {
+    background: $grey;
+    color: $white;
+}
+
+.btn--rich-text {
+    &.active {
+        color: $blue;
+    }
+}

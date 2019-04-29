@@ -1,0 +1,28 @@
+html {
+    font-size: 62.5%;    // The idea is that 16 * 625 = 10 (10px = 1rem) --> so if we say 2rem = 20px
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: $m-size;
+    color: $dark-grey;
+    line-height: 1.6;
+}
+
+* {
+    // default is: content-box
+    box-sizing: border-box;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+.is-active {
+    color: red;
+    font-weight: bold;   
+}
