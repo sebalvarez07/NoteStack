@@ -5,7 +5,7 @@ import RichInlineButtons from './RichInlineButtons';
 import { preProcessContent } from '../myTools/html-pre-processor';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { addSubject } from '../actions/subjects';
+import { startAddSubject } from '../actions/subjects';
 
 class NoteForm extends React.Component {
 
@@ -17,7 +17,7 @@ class NoteForm extends React.Component {
             title: props.note ? props.note.title : '',
             error: undefined,
             subject: props.note ? props.note.subject : 'no_subject',
-            hasOtherSubject: false,
+            hasNewSubject: false,
             newSubject: ''
         };
     };
@@ -63,21 +63,32 @@ class NoteForm extends React.Component {
             error = 'This subject already exists.';
         }
         else {
-            this.setState({ error: undefined });
+            error = undefined;
 
-            if(this.state.hasOtherSubject) 
-                this.props.addSubject( this.state.newSubject );
+            // Parse subject object to appropriate format
+            const newSubjectParsed = {
+                // Value to be read by select
+                value: this.state.newSubject.replace(' ', '_').replace('-', '_').toLowerCase(),
+                // Text displayed as typed by user
+                text: this.state.newSubject
+            }
+
+            // If new subject is typed in, save it to store
+            if(this.state.hasNewSubject) 
+                this.props.startAddSubject( newSubjectParsed );
             
+            const rawData = convertToRaw(currentContent);
+
             // Process from raw data blocks to HTML string
-            const contentArray = preProcessContent(convertToRaw(currentContent));
+            const contentArray = preProcessContent(rawData);
             
             this.props.onSubmit({
                 title: this.state.title,
                 textContent: currentContent.getPlainText().trim(),
                 content: contentArray,
                 dateCreated: moment().valueOf(),
-                rawData: convertToRaw(currentContent),
-                subject: this.state.hasOtherSubject ? this.state.newSubject.replace(' ', '_').toLowerCase() : this.state.subject
+                rawData,
+                subject: this.state.hasNewSubject ? newSubjectParsed.value : this.state.subject
             });
         }
 
@@ -100,9 +111,9 @@ class NoteForm extends React.Component {
         this.setState({ subject: selected.value });
 
         if(selected.value === 'other'){
-            this.setState({hasOtherSubject: true});
+            this.setState({hasNewSubject: true});
         } else {
-            this.setState({hasOtherSubject: false});
+            this.setState({hasNewSubject: false});
         }
     };
 
@@ -147,8 +158,7 @@ class NoteForm extends React.Component {
                 </div>
                 <div className='input-group'>
                     <div className='input-group__item'>
-                        <select 
-                            placeholder='Subject'
+                        <select
                             value={this.state.subject} 
                             onChange={this.handleOnChangeSubject}
                             >
@@ -159,17 +169,19 @@ class NoteForm extends React.Component {
                                 )
                             }
                             <option value='other'>Other</option>
-                        </select>            
+                        </select>
                     </div>
 
-                    {this.state.subject === 'other' &&
-                        <div className='input-group__item'>   
-                            <input 
-                                type='text' 
-                                value={this.state.newSubject} 
-                                onChange={this.handleNewSubject}/>
+                    {
+                        this.state.subject === 'other' &&
+                        <div className='input-group__item'>
+                            <input
+                                type='text'
+                                value={this.state.newSubject}
+                                onChange={this.handleNewSubject}
+                            />
                         </div>
-                    }
+                    } 
                 </div>
                 <div>
                     <button type='submit' className='btn btn--blue'>Submit</button>
@@ -180,7 +192,7 @@ class NoteForm extends React.Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    addSubject: (subject) => dispatch(addSubject(subject))
+    startAddSubject: (subject) => dispatch(startAddSubject(subject))
 });
 
 const mapStateToProps = (state) => ({

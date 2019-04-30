@@ -10,6 +10,8 @@ import 'draft-js/dist/Draft.css';
 import { firebase } from './firebase/firebase';
 import { login, logout } from './actions/auth';
 import LoadingPage from './components/LoadingPage';
+import { startSetNotes } from './actions/notes';
+import { startSetSubjects } from './actions/subjects';
 
 
 const store = configureStore();
@@ -42,7 +44,13 @@ firebase.auth().onAuthStateChanged((user) => {
     if(user){
 
         store.dispatch(login(user.uid));
-        renderApp();
+        
+        // The renderApp() should only be trigger after expenses have been imported from DB
+        // This isn't only for the dashboard list BUT most importantly so that we users can 
+        // Manually enter a url of view/id: or edit/id: and get a proper response    
+        store.dispatch(startSetNotes()).then(() => renderApp());
+        store.dispatch(startSetSubjects());
+        
         // If user is on the login page redirect to dashboard. 
         // If user is on another page it means they are not logged in so redirects to login
         if(history.location.pathname === '/'){

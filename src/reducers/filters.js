@@ -2,7 +2,7 @@ const defaultFilters = {
     text: '',
     sortBy: 'latest',
     subject: 'all_subjects'
-}
+};
 
 const filtersReducer = (state = defaultFilters, action) => {
     switch(action.type) {

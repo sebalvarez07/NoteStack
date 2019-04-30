@@ -2,6 +2,28 @@
 
 exports[`Should render dashboard page page 1`] = `
 <div>
-  Dashboard Page Content
+  <section
+    className="page-header"
+  >
+    <div
+      className="content-container"
+    >
+      <h2>
+        Notes Dashboard
+      </h2>
+      <Link
+        className="btn btn--blue"
+        to="/addNote"
+      >
+        Add Note
+      </Link>
+    </div>
+  </section>
+  <div
+    className="content-container"
+  >
+    <Connect(NotesFilters) />
+    <Connect(NotesList) />
+  </div>
 </div>
 `;

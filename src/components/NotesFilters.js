@@ -24,7 +24,7 @@ const NotesFilters = (props) => {
         const value = e.target.options[e.target.selectedIndex].value;
         props.setSubject(value);
     };
-
+ 
     return (
         <div className='input-group'>
             <div className='input-group__item'>
@@ -39,7 +39,7 @@ const NotesFilters = (props) => {
             <div className='input-group__item'>
                 <select value={props.filters.subject} onChange={handleOnChangeSubject}>
                     <option value='all_subjects'>All Subjects</option>
-                    {
+                    { 
                         props.subjects.map(subject => (
                             <option key={subject.value} value={subject.value}>{subject.text}</option>)
                         )

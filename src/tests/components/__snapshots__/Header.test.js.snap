@@ -15,7 +15,7 @@ exports[`Should render Header correctly 1`] = `
         to="/dashboard"
       >
         <h1>
-          Project Starter React App
+          NoteStack
         </h1>
       </Link>
       <button

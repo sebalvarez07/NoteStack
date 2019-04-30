@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { removeNote } from '../actions/notes';
+import { startRemoveNote } from '../actions/notes';
 
 class ViewNote extends React.Component  {
 
@@ -9,7 +9,7 @@ class ViewNote extends React.Component  {
 
     componentWillMount() {
         if(!(this.validNote)) {
-            this.props.history.push('/*');
+            this.props.history.push('/error-404');
         };
     };
 
@@ -20,7 +20,7 @@ class ViewNote extends React.Component  {
     };
 
     handleOnDelete = () => {
-        this.props.removeNote(this.props.note.id);
+        this.props.startRemoveNote(this.props.note.id);
         this.props.history.push('/dashboard');
     };
 
@@ -48,7 +48,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    removeNote: (id) => dispatch(removeNote(id))
+    startRemoveNote: (id) => dispatch(startRemoveNote(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewNote);

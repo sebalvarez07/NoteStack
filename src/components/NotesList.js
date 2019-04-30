@@ -5,8 +5,6 @@ import filteredNotes from '../selectors/filterNotes';
 
 const NotesList = (props) => {
 
-    console.log(props.notes);
-
     return (
         <div className='notes-list'>
             {

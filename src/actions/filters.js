@@ -14,4 +14,4 @@ export const setToEarliest = () => ({
 export const setSubject = (subject) => ({
     type: 'SET_SUBJECT',
     subject
-});
+}); 

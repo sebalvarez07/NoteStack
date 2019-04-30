@@ -1,22 +1,22 @@
 import React from 'react';
 import NoteForm from './NoteForm';
 import { connect } from 'react-redux';
-import { addNote } from '../actions/notes';
+import { startAddNote } from '../actions/notes';
 
 const AddNote = (props) => {
 
-    const onSubmit = (note) => {
-        props.addNote((note));
+    const addNote = (note) => {
+        props.startAddNote((note));
         props.history.push('/dashboard');
     }
 
     return (
-        <NoteForm onSubmit={onSubmit}/>
+        <NoteForm onSubmit={addNote}/>
     )
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    addNote: (note) => dispatch(addNote(note))
+    startAddNote: (note) => dispatch(startAddNote(note))
 })
 
 export default connect(undefined, mapDispatchToProps)(AddNote);
