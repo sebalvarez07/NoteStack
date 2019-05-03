@@ -5,8 +5,7 @@ const notes = [{
     content: "<p>test 1</p>",
     dateCreated: 0,
     rawData: {
-        blocks: [],
-        entityMap: {}
+        rawData: 'filler'
     },
     subject: "no_subject"
 }, {
@@ -16,8 +15,7 @@ const notes = [{
     content: "<p>test 2</p>",
     dateCreated: 1000,
     rawData: {
-        blocks: [],
-        entityMap: {}
+        rawData: 'filler'
     },
     subject: "react"
 }, {
@@ -27,8 +25,7 @@ const notes = [{
     content: "<p>test 3</p>",
     dateCreated: -1000,
     rawData: {
-        blocks: [],
-        entityMap: {}
+        rawData: 'filler'
     },
     subject: "react_redux"
 }];

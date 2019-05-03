@@ -1,11 +1,10 @@
 import moment from 'moment';
-import uuid from 'uuid';
 import database from '../firebase/firebase';
 
 export const addNote = (note) => {
     return {
         type: 'ADD_NOTE',
-        note
+        note 
     }
 };
 
