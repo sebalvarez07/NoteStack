@@ -3,14 +3,16 @@ html {
 }
 
 body {
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: $m-size;
-    color: $dark-grey;
+    font-size: $font-size-xs;
+    color: $grey-text;
     line-height: 1.6;
+    font-family: $font-main;
+    font-weight: 300;
 }
 
 * {
-    // default is: content-box
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -26,3 +28,13 @@ button:disabled {
     color: red;
     font-weight: bold;   
 }
+
+.d1, .d2 {
+    font-weight: 600;
+    color: $grey-darker;
+}
+
+.d1 { font-size: $font-size-xl; }
+.d2 { font-size: $font-size-lg; }
+.d3 { font-size: $font-size-md; }
+.d4 { font-size: $font-size-sm; }

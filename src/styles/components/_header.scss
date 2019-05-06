@@ -1,13 +1,11 @@
 .header {
-    background: $dark-blue;
-}
+    background: none;
+    width: 100%;
+    position: relative;
 
-.header__title {
-    color: $white;
-    text-decoration: none;
-
-    h1 {
+    .d2 {
         margin: 0;
+        line-height: 1;
     }
 }
 
@@ -15,5 +13,23 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $s-size 0;
+    height: 7.5rem;
+}
+
+.header__right-content, .header-right__added {
+    height: 7.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.header__right-content {
+    position: absolute;
+    right: 3rem;
+    top :0;
+}
+
+.header-right__added{
+    & > * {
+        margin-right: 1.3rem;
+    }
 }

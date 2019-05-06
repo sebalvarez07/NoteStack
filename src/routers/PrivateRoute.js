@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
 
 export const PrivateRoute = ({
     isAuthenticated, 
@@ -10,14 +10,16 @@ export const PrivateRoute = ({
     }) => (
         <Route {...rest} component={(props) => (
             isAuthenticated ? (
-                <div>
-                    <Header />
-                    <Component {...props} />
+                <div className="wrapper">
+                    <Sidebar />
+                    <div className='content-page'>
+                        <Component {...props} />
+                    </div>
                 </div>
             ) : (
                 <Redirect to="/" />
             )
-    )}/>
+        )}/>
 );
 
 const mapStateToProps = (state) => ({

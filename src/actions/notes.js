@@ -9,7 +9,7 @@ export const addNote = (note) => {
 };
 
 export const startAddNote = (note) => {
-    
+
     return (dispatch, getState) => {
         const {
             title = '',
@@ -17,7 +17,7 @@ export const startAddNote = (note) => {
             dateCreated = moment().valueOf(), 
             rawData = {},
             textContent = '',
-            subject = 'no_subject'
+            subject = undefined
         } = note;
 
         const rawDataJSON = JSON.stringify(rawData);

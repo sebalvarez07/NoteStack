@@ -1,0 +1,48 @@
+ .profile-dropdown {
+     position: relative;
+ }
+
+ .profile-dropdown__options {
+     position: absolute;
+     right: 0;
+     top: calc(100% + 1.5rem);
+     width: 12rem;
+     list-style: none;
+     visibility: hidden;
+
+     &.active {
+        visibility: visible;
+     }
+ }
+
+ .profile-icon {
+     cursor: pointer;
+     display: block;
+     box-shadow: none;
+     outline: none;
+     border: none;
+ }
+
+ .profile-dropdown__single-option {
+     background: $white;
+
+    .profile-dropdown__logout {
+        background: $white;
+        padding: $s-size;
+        box-shadow: none;
+        outline: none;
+        border: none;
+        margin: 0;
+        line-height: 1;
+        font-weight: 500;
+        color: $grey-darker;
+        transition: all 0.5s ease;
+        width: 100%;
+        text-align: left;
+
+        &:hover {
+            background: $grey-darker;
+            color: $white;
+        }
+    }
+ }

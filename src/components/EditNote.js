@@ -15,9 +15,9 @@ const EditNote = (props) => {
     };
 
     return (
-        <div>
-            <NoteForm onSubmit={handleEditNote} note={props.note}/>
-        </div>
+        
+        <NoteForm onSubmit={handleEditNote} note={props.note}/>
+        
     )
 };
 

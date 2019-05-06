@@ -9,7 +9,7 @@ const StyleButtons = (props) => {
 
     return (
         (<button 
-            className={`btn btn--rich-text ${props.active ? 'active' : ''}`}
+            className={`btn--rich-text ${props.active ? 'active' : ''}`}
             onClick={handleClick}
 
             >

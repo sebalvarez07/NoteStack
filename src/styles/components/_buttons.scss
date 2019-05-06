@@ -1,20 +1,40 @@
 .btn {
-    padding: $s-size;
-    font-size: $font-size-l;
+    padding: 1.2rem 2rem 1.3rem;
+    font-size: $font-size-xs;
     border: none;
-    font-weight: 300;
+    font-weight: 700;
     text-decoration: none;
     display: inline-block;
     line-height: 1;
+    border-radius: 100px;
+    box-shadow: 0 0 1rem fade-out($grey-darker, 0.9);
+
+    &:focus, &:active {
+        outline: none;
+    }
 }
 
 .btn--blue {
     background: $blue;
     color: $white;
-    transition: background 0.5s ease;
+    transition: all 0.5s ease;
+    box-shadow: 0 0 1rem fade-out($blue, 0.9);
 
     &:hover {
-        background: fade-out($blue, 0.2);
+        background: $white;
+        color: $blue;
+    }
+}
+
+.btn--green {
+    background: $green;
+    color: $white;
+    transition: all 0.5s ease;
+    box-shadow: 0 0 1rem fade-out($green, 0.9);
+
+    &:hover {
+        background: $white;
+        color: $green;
     }
 }
 
@@ -31,5 +51,23 @@
 .btn--rich-text {
     &.active {
         color: $blue;
+    }
+}
+
+.btn--icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    overflow: hidden;
+    background-size: cover!important;
+    background-position: center!important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    
+    .ionicons {
+        color: $grey-darker;
+        font-size: $font-size-md;
     }
 }

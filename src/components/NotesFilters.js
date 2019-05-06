@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 const NotesFilters = (props) => {
 
     const [textSearch, setTextSearch] = useState('');
+    const [isLatest, setIsLatest] = useState(true);
 
     const handleOnChangeText = (e) => {
         const val = e.target.value;
@@ -13,10 +14,14 @@ const NotesFilters = (props) => {
     };
 
     const handleOnChangeSortBy = (e) => {
-        const val = e.target.value;
-        if(val === 'earliest')
+
+        const isLatestUpdated = !isLatest;
+
+        setIsLatest(isLatestUpdated);
+
+        if(!isLatestUpdated)
             props.setToEarliest();
-        else if(val === 'latest')
+        else if(isLatestUpdated)
             props.setToLatest();
     };
 
@@ -26,26 +31,39 @@ const NotesFilters = (props) => {
     };
  
     return (
-        <div className='input-group'>
-            <div className='input-group__item'>
-                <input type='text' value={textSearch} onChange={handleOnChangeText}/>
+        <div className='search-ui'>
+            <div className='input-search__text'>
+                <input 
+                    className='input-text' 
+                    type='text' value={textSearch} 
+                    onChange={handleOnChangeText} 
+                    placeholder='Search Notes'/>
             </div>
-            <div className='input-group__item'>
-                <select value={props.filters.sortBy} onChange={handleOnChangeSortBy}>
-                    <option value='latest'>Latest</option>
-                    <option value='earliest'>Earliest</option>
-                </select>
+            <div className='flexer space-between'>
+                <div className='input-search__filter'>
+                    <select 
+                        className='input-select' 
+                        value={props.filters.subject} 
+                        onChange={handleOnChangeSubject}
+                        >
+                            <option value='all_subjects'>All Subjects</option>
+                            { 
+                                props.subjects.map( (subject, index) => (
+                                    <option key={subject.value} value={subject.value}>{subject.text}</option>)
+                                )
+                            }
+                    </select>
+                </div>
+                <div className='input-search__filter'>
+                    <button 
+                        className='btn-filter'
+                        onClick={handleOnChangeSortBy}
+                        > 
+                            { isLatest ? 'Latest' : 'Earliest' } 
+                    </button>
+                </div>
             </div>
-            <div className='input-group__item'>
-                <select value={props.filters.subject} onChange={handleOnChangeSubject}>
-                    <option value='all_subjects'>All Subjects</option>
-                    { 
-                        props.subjects.map(subject => (
-                            <option key={subject.value} value={subject.value}>{subject.text}</option>)
-                        )
-                    }
-                </select>
-            </div>
+            
         </div>
     );
 };

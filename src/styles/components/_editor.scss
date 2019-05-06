@@ -1,0 +1,49 @@
+.wysiwyg-editor {
+    background: $white;
+    padding: 3rem 4rem;
+    border-radius: 1rem;
+}
+
+.editor-ui {
+    padding: 0 1.5rem;
+    border-bottom: solid 1px $grey;
+    margin-bottom: 2.3rem;
+}
+
+.btn--rich-text {
+    font-size: $font-size-sm;
+    color: $grey-text;
+    background: none;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    font-weight: 500;
+    display: inline-block;
+    padding: 0 1.5rem 1.5rem;
+}
+
+.DraftEditor-editorContainer > * {
+    min-height: 30rem;
+}
+
+.DraftEditor-root {
+
+    h2, h3, h4 {
+        color: $grey-darker;
+        font-weight: 700;
+    }
+
+    h2 {
+        font-size: $font-size-xl;
+        line-height: 1;
+        margin-bottom: 5rem;
+    }
+
+    h3 {
+        font-size: $font-size-lg;
+    }
+
+    h4 {
+        font-size: $font-size-md;
+    }
+}

@@ -11,7 +11,9 @@ const AddNote = (props) => {
     }
 
     return (
+
         <NoteForm onSubmit={addNote}/>
+        
     )
 }
 

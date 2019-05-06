@@ -2,13 +2,13 @@ import React from 'react';
 import StyleButtons from './StyleButtons';
 
 const BLOCKTYPES = [
-    { label: 'Title 1', style: 'header-two' },
-    { label: 'Title 2', style: 'header-three' },
-    { label: 'Title 3', style: 'header-four' },
+    { label: 'H1', style: 'header-two' },
+    { label: 'H2', style: 'header-three' },
+    { label: 'H3', style: 'header-four' },
     { label: 'Code Block', style: 'code-block' },
-    { label: 'List Bullets', style: 'unordered-list-item'},
-    { label: 'List Numbered', style: 'ordered-list-item'},
-    { label: 'Qoute', style: 'blockquote' }
+    { label: 'UL', style: 'unordered-list-item'},
+    { label: 'OL', style: 'ordered-list-item'},
+    { label: 'Quoteblock', style: 'blockquote' }
 ];
 
 const RichBlockButtons = ({editorState, onBlockButtonClick}) => {
