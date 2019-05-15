@@ -8,22 +8,20 @@ export const addNote = (note) => {
     }
 };
 
-export const startAddNote = (note) => {
-
+export const startAddNote = ({
+        title = '',
+        dateCreated = moment().valueOf(), 
+        rawData = '',
+        textContent = '',
+        subject = ''
+    } = {}
+    ) => {
     return (dispatch, getState) => {
-        const {
-            title = '',
-            content = '', 
-            dateCreated = moment().valueOf(), 
-            rawData = {},
-            textContent = '',
-            subject = undefined
-        } = note;
 
         const rawDataJSON = JSON.stringify(rawData);
 
         const uid = getState().auth.uid;
-        const noteParsed = {title, content, dateCreated, rawData: rawDataJSON, textContent, subject}
+        const noteParsed = {title, dateCreated, rawData: rawDataJSON, textContent, subject}
 
         return database.ref(`users/${uid}/notes`).push(noteParsed).then((ref) => {
             dispatch(addNote({
@@ -32,6 +30,8 @@ export const startAddNote = (note) => {
                 ...noteParsed,
                 rawData
             }));
+
+            return ref.key
         });
     }
 };

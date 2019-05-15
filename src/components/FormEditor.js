@@ -1,46 +1,62 @@
 import React from 'react';
-import RichBlockButtons from './RichBlockButtons';
-import RichInlineButtons from './RichInlineButtons';
-import { Editor, RichUtils } from 'draft-js';
+import { Editor, RichUtils, getDefaultKeyBinding } from 'draft-js';
+import CodeUtils from 'draft-js-code';
 
 const FormEditor = (props) => {
 
-    const _onBlockButtonClick = (blockType) => {
-        props.onChange(RichUtils.toggleBlockType(props.editorState, blockType));
-    };
-
-    const _onInlineButtonClick = (inlineType) => {
-        props.onChange(RichUtils.toggleInlineStyle(props.editorState, inlineType));
-    };
-
     const handleKeyCommand = (command, editorState) => {
-        const newState = RichUtils.handleKeyCommand(editorState, command);
+        let newState;
+
+        // if (CodeUtils.hasSelectionInBlock(editorState)) {
+        // newState = CodeUtils.handleKeyCommand(editorState, command);
+        // }
+
+        // if (!newState) {
+        newState = RichUtils.handleKeyCommand(editorState, command);
+        // }
+
         if (newState) {
-          props.onChange(newState);
-          return 'handled';
+            props.onChange(newState);
+            return 'handled';
         }
         return 'not-handled';
     };
 
+    const keyBindingFn = (evt) => {
+        
+        if (!CodeUtils.hasSelectionInBlock(props.editorState)) return getDefaultKeyBinding(evt);
+
+        const command = CodeUtils.getKeyBinding(evt);
+
+        return command || getDefaultKeyBinding(evt);
+    }
+
+    const handleReturn = (evt) => {
+        
+        if (!CodeUtils.hasSelectionInBlock(props.editorState)) return 'not-handled';
+
+        props.onChange(CodeUtils.handleReturn(evt, props.editorState));
+        return 'handled';
+    }
+
+    const onTab = (evt) => {
+        if (!CodeUtils.hasSelectionInBlock(props.editorState)) return 'not-handled';
+
+        props.onChange(CodeUtils.onTab(evt, props.editorState));
+        return 'handled';
+    }
+
     return (
         <div className='wysiwyg-editor'>
-
-            <div className='editor-ui'>
-                <RichBlockButtons  
-                    editorState={props.editorState}
-                    onBlockButtonClick={_onBlockButtonClick}
-                />
-
-                <RichInlineButtons 
-                    editorState={props.editorState}
-                    onInlineButtonClick={_onInlineButtonClick}
-                />
-            </div>
             
             <Editor 
                 editorState={props.editorState} 
                 onChange={props.onChange} 
                 handleKeyCommand={handleKeyCommand}
+                // keyBindingFn={keyBindingFn}
+                // handleKeyCommand={handleKeyCommand}
+                // handleReturn={handleReturn}
+                // onTab={onTab}
             />
         </div>
     )

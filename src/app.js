@@ -7,12 +7,11 @@ import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
 import './styles/styles.scss';
 import 'draft-js/dist/Draft.css';
+import '../public/themes/codeTheme.css';
 import { firebase } from './firebase/firebase';
 import { login, logout } from './actions/auth';
 import LoadingPage from './components/LoadingPage';
 import { startSetNotes } from './actions/notes';
-import { startSetSubjects } from './actions/subjects';
-
 
 const store = configureStore();
 
@@ -49,7 +48,6 @@ firebase.auth().onAuthStateChanged((user) => {
         // This isn't only for the dashboard list BUT most importantly so that we users can 
         // Manually enter a url of view/id: or edit/id: and get a proper response    
         store.dispatch(startSetNotes()).then(() => renderApp());
-        store.dispatch(startSetSubjects());
         
         // If user is on the login page redirect to dashboard. 
         // If user is on another page it means they are not logged in so redirects to login

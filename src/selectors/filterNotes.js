@@ -8,7 +8,7 @@ export default (notes, filters) => {
         const textMatch = noteTitleText.includes(filterText) || noteContentText.includes(filterText);
 
         // Match by subject
-        const subjectMatch = note.subject.value === filters.subject || filters.subject === 'all_subjects';
+        const subjectMatch = note.subject.toLowerCase() === filters.subject.toLowerCase() || filters.subject === 'all_subjects';
 
         return textMatch && subjectMatch;
     });

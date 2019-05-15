@@ -21,12 +21,20 @@ $white: #fff;
 $grey-darker: #2f2f2f;
 $grey-text: #656565;
 $grey: #afafaf;
-$grey-light: #f3f3f3;
+$grey-light: #efeeee;
 // media queries
 $desktop-breakpoint: 45rem;
 
 // Classes layout (flex)
 .flexer { display: flex; }
 .space-between { justify-content: space-between; }
+.flex-middle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.align-center {
+    align-items: center;
+}
 
 .margin-right--sm { margin-right: $s-size }

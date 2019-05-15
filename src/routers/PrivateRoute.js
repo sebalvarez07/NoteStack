@@ -3,27 +3,29 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 
-export const PrivateRoute = ({
-    isAuthenticated, 
-    component: Component,
-    ...rest
-    }) => (
-        <Route {...rest} component={(props) => (
-            isAuthenticated ? (
-                <div className="wrapper">
-                    <Sidebar />
-                    <div className='content-page'>
-                        <Component {...props} />
+export const PrivateRoute = ({ isAuthenticated, component: Component, ...rest }) => {
+
+        return (
+            <Route {...rest} component={(props) => (
+                isAuthenticated ? (
+                    <div className={`wrapper ${ rest.sidebarCollapsed ? 'sidebar-collapse' : '' } ${ rest.headerCollapsed ? 'header-collapse' : '' }` }>
+                        <Sidebar />
+                        <div className='content-page'>
+                            <Component {...props} />
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <Redirect to="/" />
-            )
-        )}/>
-);
+                ) : (
+                    <Redirect to="/" />
+                )
+            )}/>
+        )
+    }
+;
 
 const mapStateToProps = (state) => ({
-    isAuthenticated: !!state.auth.uid
+    isAuthenticated: !!state.auth.uid,
+    headerCollapsed: state.collapseStatus.headerCollapsed,
+    sidebarCollapsed: state.collapseStatus.sidebarCollapsed,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

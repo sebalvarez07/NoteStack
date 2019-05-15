@@ -5,14 +5,11 @@
  .profile-dropdown__options {
      position: absolute;
      right: 0;
-     top: calc(100% + 1.5rem);
-     width: 12rem;
+     bottom: -1px;
+     width: 15.7rem;
      list-style: none;
-     visibility: hidden;
-
-     &.active {
-        visibility: visible;
-     }
+     visibility: visible;
+     transform: translateY(100%);
  }
 
  .profile-icon {
@@ -38,7 +35,7 @@
         color: $grey-darker;
         transition: all 0.5s ease;
         width: 100%;
-        text-align: left;
+        text-align: center;
 
         &:hover {
             background: $grey-darker;

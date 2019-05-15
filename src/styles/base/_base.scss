@@ -18,6 +18,9 @@ body {
 
 button {
     cursor: pointer;
+    border: none;
+    box-shadow: none;
+    outline: none;
 }
 
 button:disabled {

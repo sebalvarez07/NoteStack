@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { setText, setToLatest, setToEarliest, setSubject } from '../actions/filters';
 import { connect } from 'react-redux';
+import getSubject from '../selectors/subjects';
 
 const NotesFilters = (props) => {
 
@@ -47,10 +48,8 @@ const NotesFilters = (props) => {
                         onChange={handleOnChangeSubject}
                         >
                             <option value='all_subjects'>All Subjects</option>
-                            { 
-                                props.subjects.map( (subject, index) => (
-                                    <option key={subject.value} value={subject.value}>{subject.text}</option>)
-                                )
+                            {
+                                props.subjects.map(subject => <option key={subject} value={subject}>{subject}</option>)                                       
                             }
                     </select>
                 </div>
@@ -70,7 +69,7 @@ const NotesFilters = (props) => {
 
 const mapStateToProps = (state) => ({
     filters: state.filters,
-    subjects: state.subjects
+    subjects: getSubject(state.notes)
 })
 
 const mapDispatchToProps = (dispatch) => ({

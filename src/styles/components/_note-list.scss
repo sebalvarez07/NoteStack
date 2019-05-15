@@ -1,7 +1,7 @@
 .preview-single {
     display: block;
     text-decoration: none;
-    padding: 2rem 0;
+    padding: 1.5rem 0;
     border-bottom: solid 1px $grey;
 }
 
@@ -11,12 +11,12 @@
 }
 
 .preview__date-subject {
-    margin-bottom: $s-size;
+    margin-bottom: 0.5rem;
 }
 
 .preview__subject {
     font-size: $font-size-xxs;
-    letter-spacing: 0.15rem;
+    // letter-spacing: 0.15rem;
     font-weight: 500;
     color: $grey-darker;
     display: inline-block;
@@ -28,6 +28,7 @@
     color: $grey-darker;
     display: inline-block;
     font-weight: 400;
+    line-height: 1;
 }
 
 .preview__date {

@@ -1,54 +1,90 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startLoginOut } from '../actions/auth';
+import { startAddNote } from '../actions/notes';
 import { firebase } from '../firebase/firebase';
+import SidebarCollapseButton from './SidebarCollapseButton';
+import { history } from '../routers/AppRouter';
 
-const ProfileDropdown = (props) => (
-    <div className='profile-dropdown'>
-        <span 
-            onClick={(e) => e.target.parentElement.querySelector('.profile-dropdown__options').classList.toggle('active')}
-            className='profile-icon btn--icon' 
-            style={{ background: `url(${firebase.auth().currentUser.photoURL})` }}></span>
-        <ul className='profile-dropdown__options'>
-            <li className='profile-dropdown__single-option'>
-                <button 
-                    className="profile-dropdown__logout"
-                    onClick={props.startLoginOut}
-                    >
-                    Logout
-                </button>
-            </li>
-        </ul>
-    </div>
-);
+const ProfileDropdown = (props) => {
 
+    const [activeDropdown, setActiveDropdown] = useState(false);
+    const handleActiveDropdown = (e) => {
+        e.preventDefault();
+        setActiveDropdown(!activeDropdown);
+    }
+    return (
+        <div className='profile-dropdown h-w80 flex-middle h-border-sides'>
+            <button 
+                onClick={handleActiveDropdown}
+                className='profile-icon btn--icon' 
+                style={{ background: `url(${firebase.auth().currentUser.photoURL})` }}>
+            </button>
+            { activeDropdown && 
+                <ul className='profile-dropdown__options'>
+                    <li className='profile-dropdown__single-option'>
+                        <button 
+                            className="profile-dropdown__logout"
+                            onClick={props.startLoginOut}
+                            >
+                            Logout
+                        </button>
+                    </li>
+                </ul>
+            }
+        </div>
+    )
+};
+ 
 export const Header = (props) => {
 
+    const handleAddNote = (e) => {
+        e.preventDefault();
+        props.startAddNote().then(noteId => {
+            history.push(`/edit/${noteId}`);
+        });
+    };
+
     return (
-        <header className='header'>
+        <header className={ `header` }>
+        
+            <div className='sidebar-collapser'>
+                <SidebarCollapseButton />
+            </div>
+
             <div className='content-container'>
-                <div className='header__content'>
+                <div className='header__content header__content-layout'>
                     <div className='header__left-side'>
                         {props.left_side}
                     </div>
                     
                     <div className='header__right-side'>
-                        <div className='header__right-content'>
-                            { props.right_side }
-                            <ProfileDropdown startLoginOut={props.startLoginOut}/>
+                        <div className='add-note-container flex-middle'>
+                            <button 
+                                onClick={handleAddNote}
+                                className='btn btn--blue'>
+                                + New Note
+                            </button>
                         </div>
+                        <Link
+                            to='/dashboard'
+                            className='h-border-sides h-w80 flex-middle header-icon header-icon--lg'>
+                            <i className="ionicons ion-android-home"></i>
+                        </Link>
+                        <ProfileDropdown startLoginOut={props.startLoginOut}/>
                     </div>
+                    
                 </div>
             </div>
         </header>
     )
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        startLoginOut: () => dispatch(startLoginOut())
-    }
-}
+const mapDispatchToProps = (dispatch) => ({
+    startLoginOut: () => dispatch(startLoginOut()),
+    startAddNote: () => dispatch(startAddNote())
+})
+        
  
 export default connect(undefined, mapDispatchToProps)(Header);

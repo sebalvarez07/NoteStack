@@ -6,6 +6,7 @@ const DashboardPage = (props) => (
 
     <div className='wrapper-inner'>
         <Header 
+            sidebarCollapseButton={props.sidebarCollapseButton}
             left_side={
                 <h1 className='d2'>Dashboard</h1>
             }

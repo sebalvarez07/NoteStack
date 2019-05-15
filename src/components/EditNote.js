@@ -1,28 +1,37 @@
 import React from 'react';
-import NoteForm from './NoteForm';
+import NotePage from './NotePage';
 import { connect } from 'react-redux';
-import { startEditNote } from '../actions/notes';
+import { startEditNote, startRemoveNote } from '../actions/notes';
 
-const EditNote = (props) => {
-
-    if(!(!!props.note)) {
-        props.history.push('/error-404');
+class EditNote extends React.Component {
+ 
+    componentWillMount () {
+        if(!(!!this.props.note)) {
+            this.props.history.push('/error-404');
+        }
     }
 
-    const handleEditNote = (updates) => {
-        props.startEditNote(props.note.id, updates);
-        props.history.push('/dashboard');
+    handleEditNote = (updates) => {
+        this.props.startEditNote(this.props.note.id, updates);
     };
 
-    return (
-        
-        <NoteForm onSubmit={handleEditNote} note={props.note}/>
-        
-    )
+    render() {
+        return (
+            <div>
+                { !!this.props.note && 
+                    <NotePage
+                        onSubmit={this.handleEditNote} 
+                        note={this.props.note}
+                    />
+                }
+            </div>
+        )
+    }
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    startEditNote: (id, updates) => dispatch(startEditNote(id, updates))
+    startEditNote: (id, updates) => dispatch(startEditNote(id, updates)),
+    startRemoveNote: (id) => dispatch(startRemoveNote(id, updates))
 });
 
 const mapStateToProps = (state, props) => ({

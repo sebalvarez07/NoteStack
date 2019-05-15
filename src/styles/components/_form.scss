@@ -1,87 +1,74 @@
-.form {
-    display: flex;
-    flex-direction: column;
-
-    > * {
-        margin-bottom: $m-size;
-    }
-}
-
 .form__error {
     margin: 0;
     margin-bottom: $m-size;
     font-style: italic;
 }
 
-.group__title-subject {
-    display: flex;
-    align-items: flex-end;
-}
-
-.input-item__other, .input-item__select {
-    width: 23rem;
-}
-
-.input-item__other {
-    margin-left: auto;
-}
-
-.input-item__select {
-    margin-left: $l-size;
+.note-form__subject {
     position: relative;
-
-    .select {
-        width: 100%;
-        position: relative;
-        z-index: 1;
-        font-size: $font-size-md;
-        font-weight: 500;
-        color: $grey-darker;
-        line-height: 2;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-    }
 
     .ionicons {
         position: absolute;
         top: 50%;
-        right: 4rem;
+        right: 0;
         color: $grey-darker;
         z-index: 0;
+        font-size: $font-size-xxs;
         transform: translateY(-50%);
     }
 }
 
-.input-group--note-form, .input-item__other {
-    border-bottom: solid 1px $grey;
-    margin-bottom: 2.3rem;
-    
-    .select, .input {
-        border: none;
+.note-form-item {
+    display: flex;
+    align-items: center;
+
+    .note-form__label {
+        color: $grey;
+        font-weight: 500;
+        line-height: 1;
+        margin-right: 1rem;
+        font-size: $font-size-md;
+    }
+
+    &.note-form__title {
+        margin-bottom: .5rem;
+        .input {
+            font-size: $font-size-sm;
+            min-width: 30rem;
+            line-height: unset;
+        }
+    }
+
+    &.note-form__subject {
+        padding-bottom: 0.6rem;
+        .note-form__label {
+            font-size: $font-size-xxs;
+        }
+    }
+
+    .select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        padding-right: 2rem;
+        line-height: 1.5;
+        font-size: $font-size-xxs;
+    }
+
+    .input {
+        font-size: $font-size-md;
+    }
+
+    .input, .select {
         background: none;
         outline: none;
-        padding: 1.5rem 4rem;
-    }
-}
-
-.input-item__title {
-    flex: 1;
-    
-    .input {
-        width: 100%;
-        font-size: $font-size-lg;
-        font-weight: 200;
-        line-height: 1;
+        box-shadow: none;
+        border: none;
         color: $grey-darker;
 
         &::-webkit-input-placeholder, &:-ms-input-placeholder, &::placeholder, &:-moz-placeholder {
             color: $grey!important;
-            font-weight: 100!important; 
-        }
-
-        &:focus, &:active {
-            outline: none;
+            font-style: italic;
         }
     }
 }

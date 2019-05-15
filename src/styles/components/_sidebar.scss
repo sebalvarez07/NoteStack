@@ -1,18 +1,45 @@
  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 38.5rem;
-    background: $white;
-    padding: 4rem;
-    overflow-y: scroll;
- }
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: 100vh;
+   width: 38.5rem;
+   display: block;
+   transform: translateX(0);
+   z-index: 1000;
+   transition: all 0.5s ease;
 
- .content-page {
-    position: relative;
-    min-height: 100vh;
-    width: calc(100% - 38.5rem);
-    margin-left: auto;
-    background: $grey-light;
- }
+   &.collapse {
+      transform: translateX(-100%);
+   }
+   
+}
+
+.sidebar__content {
+   background: $white;
+   overflow-y: scroll;
+   padding: 4rem;
+   height: 100%;
+}
+
+.content-page {
+   position: absolute;
+   height: 100vh;
+   width: calc(100% - 38.5rem);
+   right: 0;
+   top: 0;
+   overflow-y: scroll;
+   background: $grey-light;
+   transition: all 0.5s ease;
+   
+}
+
+.sidebar-collapse {
+   .sidebar {
+      transform: translateX(-100%);
+   }
+
+   .content-page {
+      width: 100%;
+   }
+}

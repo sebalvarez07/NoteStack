@@ -1,7 +1,33 @@
+.header-wrapper {
+    transform: translateY(0);
+    transition: all 0.5s ease;
+    width: calc(100% - 38.5rem);
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    background: $grey-light;
+    transition: all 0.5s ease;
+}
+
+.header-collapse {
+    .header-wrapper {
+        transform: translateY(-7.5rem);
+    }
+}
+
+.sidebar-collapse {
+    .header-wrapper {
+        width: 100%;
+    }
+}
+
+
 .header {
-    background: none;
-    width: 100%;
+    background: $white;
     position: relative;
+    margin-bottom: 0.5px;
+    margin-left: 0.5px;
 
     .d2 {
         margin: 0;
@@ -9,27 +35,137 @@
     }
 }
 
-.header__content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 7.5rem;
-}
-
-.header__right-content, .header-right__added {
-    height: 7.5rem;
-    display: flex;
-    align-items: center;
-}
-
-.header__right-content {
+.sidebar-collapser {
+    height: 100%;
+    width: 4rem;
     position: absolute;
-    right: 3rem;
+    top: 0;
+    left: 0;
+
+    .sidebar-collapser__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        box-shadow: none;
+        outline: none;
+        color: $grey;
+        width: 100%;
+        background: $white;
+        height: 100%;
+    }
+   
+   .ionicons {
+      font-size: $font-size-sm;
+   }
+}
+
+.sidebar-collapse--sm {
+    visibility: hidden;
+}
+
+.header-collapse {
+    .sidebar-collapse--sm {
+        visibility: visible;
+    }
+}
+
+
+.header__content {
+    height: 7.5rem;
+}
+
+.header__content-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.h-w80 {
+    width: 8rem;
+}
+
+.h-w40 {
+    width: 4rem;
+ 
+    .header-icon {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.add-note-container {
+    padding-right: 2rem;
+}
+
+.header-icon {
+    color: $grey;
+}
+
+.header-icon--lg {
+    font-size: $font-size-lg;
+}
+
+.header-icon--xs {
+    font-size: 1.9rem;
+}
+
+.ion-ios-box {
+    font-size: 2.2rem;
+}
+
+.has-saved {
+    .save-box {
+        background: $white;
+        color: $grey;
+    }
+}
+
+.not-saved {
+    .save-box {
+        // background: $blue;
+        color: $blue;
+    }
+}
+
+
+.header__right-side {
+    height: 100%; 
+    position: absolute;
     top :0;
+    right: 0.5px;
+    display: flex;
 }
 
 .header-right__added{
     & > * {
         margin-right: 1.3rem;
     }
+}
+
+.h-border-sides {
+    position: relative;
+
+    &:before, &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: $grey-light;
+    }
+
+    &:before {
+        left: -0.5px;
+    }
+
+    &:after {
+        right: -0.5px;
+    }
+
+}
+
+.ReactModal__Overlay--after-open {
+    z-index: 10000;
 }
