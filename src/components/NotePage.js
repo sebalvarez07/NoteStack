@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import NotePageHeader from './NotePageHeader';
 import NoteUI from './NoteUI';
 
+
 class NoteForm extends React.Component {
 
     constructor(props) {
@@ -14,7 +15,6 @@ class NoteForm extends React.Component {
         this.state = {
             editorState: this.props.note.rawData !== '' ? EditorState.createWithContent(convertFromRaw(this.props.note.rawData)) : EditorState.createEmpty(),
             title: this.props.note.title || '',
-            error: undefined,
             subject: this.props.note.subject,
             hasNewSubject: false,
             newSubject: ''
@@ -104,14 +104,6 @@ class NoteForm extends React.Component {
         this.setState({ newSubject: value });
     };
 
-    _onBlockButtonClick = (blockType) => {
-        this.onChange(RichUtils.toggleBlockType(this.state.editorState, blockType));
-    };
-
-    _onInlineButtonClick = (inlineType) => {
-        this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, inlineType));
-    };
-
     render () {
         return (
             <div className='note-page'>
@@ -125,15 +117,13 @@ class NoteForm extends React.Component {
                         editorUI={
                             <NoteUI
                                 editorState={this.state.editorState}
-                                onBlockButtonClick={this._onBlockButtonClick}
-                                onInlineButtonClick={this._onInlineButtonClick}
+                                onChange={this.onChange}
                             />
                         }
                     />
                     <div className='editor-wrapper'>
                         <div className='content-container'>
                             
-                            { !!this.state.error && <h2>{this.state.error}</h2> }
                             {
                                 this.state.subject === 'other' &&
                                 <div className='input-item__other'>

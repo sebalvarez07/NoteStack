@@ -41,7 +41,7 @@ const NotePageHeader = (props) => {
                         </div>
                     </div>
                 }
-            />
+            /> 
             <div className='note-ui'>
                 <div className='sidebar-collapser sidebar-collapse--sm'>
                     <SidebarCollapseButton />
