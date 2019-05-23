@@ -1,12 +1,12 @@
 export const BLOCKTYPES = [
-    { label: 'CODE', style: 'code-block' },
+    { label: 'CODE', style: 'codeBlockJS' },
     { label: 'UL', style: 'unordered-list-item'},
     { label: 'OL', style: 'ordered-list-item'},
     { label: 'QUOTE', style: 'blockquote' }
 ];
 
 export const FONTTYPES = [
-    { label: 'Paragraph', style: 'paragraph' },
+    { label: 'Normal Text', style: 'unstyled' },
     { label: 'Title', style: 'header-two' },
     { label: 'Heading 1', style: 'header-three' },
     { label: 'Heading 2', style: 'header-four' },
@@ -14,10 +14,10 @@ export const FONTTYPES = [
 ];
 
 export const INLINETYPES = [
-    { label: 'Bold', style: 'BOLD' },
-    { label: 'Italic', style: 'ITALIC' },
-    { label: 'Underline', style: 'UNDERLINE' },
-    { label: 'Monospace', style: 'CODE' },
+    { label: 'B', style: 'BOLD' },
+    { label: 'I', style: 'ITALIC' },
+    { label: 'U', style: 'UNDERLINE' },
+    // { label: 'Monospace', style: 'CODE' },
 ];
 
 export const colorStyleMap = {
@@ -33,4 +33,19 @@ export const colorStyleMap = {
     'YELLOW': {
         color: 'yellow'
     }
-}  
+};
+
+export const HighlighterStyleMap = {
+    'RED_BG': {
+        backgroundColor: 'red'
+    },
+    'BLUE_BG': {
+        backgroundColor: 'blue'
+    },
+    'GREEN_BG': {
+        backgroundColor: 'green'
+    },
+    'YELLOW_BG': {
+        backgroundColor: 'yellow'
+    }
+};

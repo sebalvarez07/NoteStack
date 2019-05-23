@@ -3,6 +3,7 @@ import authReducer from '../reducers/auth';
 import notesReducer from '../reducers/notes';
 import filtersReducer from '../reducers/filters';
 import collapseStatus from '../reducers/collapseStatus';
+import editorStateReducer from '../reducers/editorState';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -14,7 +15,8 @@ export default () => {
             auth: authReducer,
             notes: notesReducer,
             filters: filtersReducer,
-            collapseStatus: collapseStatus
+            collapseStatus: collapseStatus,
+            editorState: editorStateReducer
         }),
         composeEnhancers(applyMiddleware(thunk))
         // This line of code allows us to use the store chrome extension for dev tools

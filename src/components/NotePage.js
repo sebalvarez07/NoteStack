@@ -1,16 +1,18 @@
 import React from 'react';
-import { EditorState, convertToRaw, convertFromRaw, RichUtils } from 'draft-js';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import FormEditor from './FormEditor';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import NotePageHeader from './NotePageHeader';
 import NoteUI from './NoteUI';
-
+import { setEditorState } from '../actions/editorState';
 
 class NoteForm extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.props.setEditorState(this.props.note.rawData !== '' ? EditorState.createWithContent(convertFromRaw(this.props.note.rawData)) : EditorState.createEmpty());
 
         this.state = {
             editorState: this.props.note.rawData !== '' ? EditorState.createWithContent(convertFromRaw(this.props.note.rawData)) : EditorState.createEmpty(),
@@ -28,6 +30,8 @@ class NoteForm extends React.Component {
 
         this.readyToSave = true;
         this.componentUnmounted = false;
+        this.editorRef = React.createRef();
+        this.focus = (e) => {this.editorRef.current.focus()}
     };
 
     saveNote = () => {
@@ -60,8 +64,13 @@ class NoteForm extends React.Component {
 
     onChange = (editorState) => {
 
+        this.props.setEditorState({
+            ...this.props.editorState,
+            ...editorState
+        });
+
         this.setState({
-            editorState
+            editorState: editorState
         });
     };    
 
@@ -137,7 +146,7 @@ class NoteForm extends React.Component {
                                 </div>
                             }
                             
-                            <FormEditor onChange={this.onChange} editorState={this.state.editorState}/>
+                            <FormEditor editorRef={this.editorRef} onChange={this.onChange} editorState={this.state.editorState}/>
                         </div>
                     </div>
                 </form>
@@ -147,11 +156,13 @@ class NoteForm extends React.Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    addSubject: (subject) => dispatch(addSubject(subject))
+    addSubject: (subject) => dispatch(addSubject(subject)),
+    setEditorState: (editorState) => dispatch(setEditorState(editorState))
 });
 
 const mapStateToProps = (state) => ({
-    subjects: state.notes.map(note => note.subject)
+    subjects: state.notes.map(note => note.subject),
+    editorState: state.editorState
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoteForm);

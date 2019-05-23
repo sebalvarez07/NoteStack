@@ -4,17 +4,17 @@
     font-style: italic;
 }
 
-.note-form__subject {
+.note-item__subject {
     position: relative;
 
     .ionicons {
         position: absolute;
         top: 50%;
-        right: 0;
+        right: 1rem;
         color: $grey-darker;
         z-index: 0;
-        font-size: $font-size-xxs;
-        transform: translateY(-50%);
+        font-size: 1.2rem;
+        transform: translateY(-35%);
     }
 }
 
