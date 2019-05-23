@@ -7,7 +7,6 @@ import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
 import './styles/styles.scss';
 import 'draft-js/dist/Draft.css';
-import '../public/themes/codeTheme.css';
 import { firebase } from './firebase/firebase';
 import { login, logout } from './actions/auth';
 import LoadingPage from './components/LoadingPage';
@@ -97,6 +96,28 @@ Prism.languages.python={comment:{pattern:/(^|[^\\])#.*/,lookbehind:!0},"string-i
           this.languageName = languageName;
           this.highlighted = {};
         }
+
+        tokensToDecorations(token, offset, blockKey, decorations, type) {
+
+            if(typeof token === 'string' || typeof token.content === 'string') {
+              
+               var tokId = 'tok'+offset;
+               var completeId = blockKey + '-' + tokId;
+               this.highlighted[blockKey][tokId] = typeof token === 'string'? type : token.type;
+               occupySlice(decorations, offset, offset + token.length, completeId);
+               return offset + (token.length);
+            }
+            else if(Array.isArray(token.content)){
+              
+              var that = this;
+              var _offset = offset;
+              for(let tok of token.content){
+                _offset = that.tokensToDecorations(tok, _offset, blockKey, decorations, token.type);
+              }
+              return _offset;
+            }
+        }
+
         getDecorations(block) {
           var blockType = block.getType();
           var blockKey = block.getKey();
@@ -107,51 +128,27 @@ Prism.languages.python={comment:{pattern:/(^|[^\\])#.*/,lookbehind:!0},"string-i
             return List(decorations);
           }
 
-          var highlightedJS = Prism.highlight(blockText, this.grammar, this.languageName);
-          console.log('highlightedJS', highlightedJS);
           var tokens = Prism.tokenize(blockText, this.grammar);
-          console.log('tokens', tokens);
           var offset = 0;
           var that = this;
           tokens.forEach(function(tok) {
             if (typeof tok === 'string') {
-              console.log('offset before', offset);
               offset += tok.length;
-              console.log('offset after', offset);
-              console.log('tok.length', tok.length);
             } else {
-              console.log('offset else', offset);
-              var tokId = 'tok'+offset;
-              console.log('tokId', tokId);
-              console.log('blockKey', blockKey);
-              var completeId = blockKey + '-' + tokId;
-              console.log('completeId', completeId);
-              that.highlighted[blockKey][tokId] = tok;
-              console.log('that.highlighted[blockKey][tokId]', that.highlighted[blockKey][tokId]);
-              occupySlice(decorations, offset, offset + tok.length, completeId);
-              console.log('tok.content.length', tok.content.length);
-              console.log('decorations', decorations);
-              offset += tok.length;
-              console.log('offset', offset);
+              offset = that.tokensToDecorations(tok, offset, blockKey, decorations, tok.type);
             }
           });
           return List(decorations);
         }
         getComponentForKey(key) {
           return function(props) {
-            console.log('// ------ Get Component For Key ----- //');
-            console.log('props.tokType', props.tokType);
-            console.log('props.decoratedtext', props.decoratedtext);
-            console.log('props.toktype', props.toktype);
-            console.log('// ---------------------------------- //');
             return <span 
                     decoratedtext={props.decoratedtext}
                     offsetkey={props.offsetkey}
-                    toktype={props.toktype} 
                     className={'token ' + props.tokType}
                     >
-                    {props.children}
-                </span>;
+                    { props.children }
+                </span>;  
           }
         }
         getPropsForKey(key) {
@@ -159,12 +156,9 @@ Prism.languages.python={comment:{pattern:/(^|[^\\])#.*/,lookbehind:!0},"string-i
           var blockKey = parts[0];
           var tokId = parts[1];
           var token = this.highlighted[blockKey][tokId];
-          console.log('// ------ Get Props For Key ----- //');
-            console.log('token.type', token.type);
-            console.log('token', token);
-            console.log('// ---------------------------------- //');
           return {
-            tokType: token.type
+            tokType: token,
+            offsetkey: key
           };
         }
       }
@@ -180,7 +174,9 @@ Prism.languages.python={comment:{pattern:/(^|[^\\])#.*/,lookbehind:!0},"string-i
         render() {
         return (
             <pre className={`public-DraftStyleDefault-pre ${this.props.nameClass}`}>
+              <code className={`${this.props.nameClass}`}>
                 { this.props.children }
+              </code>
             </pre>
         );
         }
@@ -231,7 +227,7 @@ Prism.languages.python={comment:{pattern:/(^|[^\\])#.*/,lookbehind:!0},"string-i
           this.state = {
             editorState: EditorState.createEmpty(decorator),
           };
-          this.focus = () => this.refs.editor.focus();
+          // this.focus = () => this.refs.editor.focus();
           this.onChange = (editorState) => this.setState({editorState});
           this.handleKeyCommand = (command) => this._handleKeyCommand(command);
           this.toggleBlockType = (type) => this._toggleBlockType(type);
@@ -283,7 +279,7 @@ Prism.languages.python={comment:{pattern:/(^|[^\\])#.*/,lookbehind:!0},"string-i
                 editorState={editorState}
                 onToggle={this.toggleInlineStyle}
               />
-              <div className={className} onClick={this.focus}>
+              <div className={className}>
                 <Editor
                   blockStyleFn={getBlockStyle}
                   customStyleMap={styleMap}
@@ -292,8 +288,7 @@ Prism.languages.python={comment:{pattern:/(^|[^\\])#.*/,lookbehind:!0},"string-i
                   handleKeyCommand={this.handleKeyCommand}
                   onChange={this.onChange}
                   placeholder="Tell a story..."
-                  ref="editor"
-                  spellCheck={true}
+                  // ref="editor"
                 />
               </div>
             </div>
@@ -393,7 +388,5 @@ Prism.languages.python={comment:{pattern:/(^|[^\\])#.*/,lookbehind:!0},"string-i
           </div>
         );
       };
-
-
 
 ReactDOM.render(<PrismEditorExample />, document.getElementById('app'));

@@ -17,11 +17,11 @@ class CodeCustomBlock extends React.Component {
         this.content = convertFromHTML(this.content);
         this.content = ContentState.createFromBlockArray(this.content.contentBlocks, this.content.entityMap);
         // document.querySelector(`.${this.props.blockProps.nameClass}`).insertAdjacentHTML('afterbegin', this.content);
-    }
+    };
 
     componentDidUpdate() {
 
-    }
+    };
   
     render() {
       
