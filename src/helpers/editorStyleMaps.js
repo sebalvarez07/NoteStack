@@ -1,5 +1,8 @@
 export const BLOCKTYPES = [
-    { label: 'CODE', style: 'codeBlockJS' },
+    {label: 'JS', style: 'codeBlockJS'},
+    {label: 'PHP', style: 'codeBlockPHP'},
+    {label: 'CSS', style: 'codeBlockCSS'},
+    {label: 'HTML', style: 'codeBlockHTML'},
     { label: 'UL', style: 'unordered-list-item'},
     { label: 'OL', style: 'ordered-list-item'},
     { label: 'QUOTE', style: 'blockquote' }

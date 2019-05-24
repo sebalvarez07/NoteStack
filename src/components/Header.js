@@ -16,11 +16,11 @@ const ProfileDropdown = (props) => {
     }
     return (
         <div className='profile-dropdown h-w80 flex-middle h-border-sides'>
-            <button 
-                onClick={handleActiveDropdown}
+            <span 
+                onMouseDown={handleActiveDropdown}
                 className='profile-icon btn--icon' 
                 style={{ background: `url(${firebase.auth().currentUser.photoURL})` }}>
-            </button>
+            </span>
             { activeDropdown && 
                 <ul className='profile-dropdown__options'>
                     <li className='profile-dropdown__single-option'>

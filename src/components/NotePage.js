@@ -6,13 +6,27 @@ import { connect } from 'react-redux';
 import NotePageHeader from './NotePageHeader';
 import NoteUI from './NoteUI';
 import { setEditorState } from '../actions/editorState';
+import MultiDecorator from 'draft-js-multidecorators';
+import PrismDraftDecorator from '../helpers/prismDecorator';
+
+const decoratorJS = new PrismDraftDecorator(Prism.languages.javascript, 'codeBlockJS', 'javascript');
+const decoratorPHP = new PrismDraftDecorator(Prism.languages.php, 'codeBlockPHP', 'php');
+const decoratorCSS = new PrismDraftDecorator(Prism.languages.css, 'codeBlockCSS', 'css');
+const decoratorHTML = new PrismDraftDecorator(Prism.languages.markup, 'codeBlockHTML', 'markup');
+
+const decorator = new MultiDecorator([
+    decoratorJS,
+    decoratorPHP,
+    decoratorCSS,
+    decoratorHTML
+]);
 
 class NoteForm extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.props.setEditorState(this.props.note.rawData !== '' ? EditorState.createWithContent(convertFromRaw(this.props.note.rawData)) : EditorState.createEmpty());
+        this.props.setEditorState(this.props.note.rawData !== '' ? EditorState.createWithContent(convertFromRaw(this.props.note.rawData), decorator) : EditorState.createEmpty(), decorator);
 
         this.state = {
             editorState: this.props.note.rawData !== '' ? EditorState.createWithContent(convertFromRaw(this.props.note.rawData)) : EditorState.createEmpty(),
@@ -64,13 +78,8 @@ class NoteForm extends React.Component {
 
     onChange = (editorState) => {
 
-        this.props.setEditorState({
-            ...this.props.editorState,
-            ...editorState
-        });
-
         this.setState({
-            editorState: editorState
+            editorState: EditorState.set(editorState, { decorator })
         });
     };    
 
@@ -116,7 +125,7 @@ class NoteForm extends React.Component {
     render () {
         return (
             <div className='note-page'>
-                <form onSubmit={this.onSubmit} className={`from ${this.props.noteStatus ? 'has-saved': 'not-saved'}`}>
+                <div className={`from ${this.props.noteStatus ? 'has-saved': 'not-saved'}`}>
                     <NotePageHeader 
                         noteID={this.props.note.id}
                         title={this.state.title} 
@@ -149,7 +158,7 @@ class NoteForm extends React.Component {
                             <FormEditor editorRef={this.editorRef} onChange={this.onChange} editorState={this.state.editorState}/>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>   
         )
     }

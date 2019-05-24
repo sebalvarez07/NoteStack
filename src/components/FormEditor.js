@@ -3,31 +3,35 @@ import Draft, { Editor, RichUtils } from 'draft-js';
 import { colorStyleMap, HighlighterStyleMap } from '../helpers/editorStyleMaps';
 import CodeUtils from 'draft-js-code';
 import extendedBlockRenderMap from './CustomCodeBlocks';
+import { registerCopySource, handleDraftEditorPastedText} from "draftjs-conductor";
 
-const FormEditor = (props) => {
+class FormEditor extends React.Component {
 
-    const handleKeyCommand = (command) => {
+    componentDidMount() {
+        this.copySource = registerCopySource(this.editorRef);
+    }
+
+    componentWillUnmount() {
+        if (this.copySource) {
+          this.copySource.unregister();
+        }
+      }
+
+    handleKeyCommand = (command) => {
         
-        let newState;
-        const editorState = props.editorState;
+        const editorState = this.props.editorState;
 
-        if (CodeUtils.hasSelectionInBlock(editorState)) {
-            newState = CodeUtils.handleKeyCommand(editorState, command);
-        }
-
-        if (!newState) {
-            newState = RichUtils.handleKeyCommand(editorState, command);
-        }
+        const newState = RichUtils.handleKeyCommand(editorState, command);
 
         if (newState) {
-            props.onChange(newState);
+            this.props.onChange(newState);
             return 'handled';
         }
         return 'not-handled';
     };
 
-    const keyBindingFn = (evt) => {
-        const editorState = props.editorState;
+    keyBindingFn = (evt) => {
+        const editorState = this.props.editorState;
         if (!CodeUtils.hasSelectionInBlock(editorState)) return Draft.getDefaultKeyBinding(evt);
 
         const command = CodeUtils.getKeyBinding(evt);
@@ -35,38 +39,49 @@ const FormEditor = (props) => {
         return command || Draft.getDefaultKeyBinding(evt);
     }
 
-    const handleReturn = (evt) => {
-        const editorState = props.editorState;
+    handleReturn = (evt) => {
+        const editorState = this.props.editorState;
         if (!CodeUtils.hasSelectionInBlock(editorState)) return 'not-handled';
 
-        props.onChange(CodeUtils.handleReturn(evt, editorState));
+        this.props.onChange(CodeUtils.handleReturn(evt, editorState));
         return 'handled';
     }
 
-    const onTab = (evt) => {
-        const editorState = props.editorState;
+    onTab = (evt) => {
+        const editorState = this.props.editorState;
         if (!CodeUtils.hasSelectionInBlock(editorState)) return 'not-handled';
 
-        props.onChange(CodeUtils.onTab(evt, editorState));
+        this.props.onChange(CodeUtils.onTab(evt, editorState));
         return 'handled';
     }   
 
-    return (
-        <div className='wysiwyg-editor'>
-            
-            <Editor 
-                editorState={props.editorState} 
-                onChange={props.onChange} 
-                handleKeyCommand={handleKeyCommand}
-                customStyleMap={{...colorStyleMap, ...HighlighterStyleMap}}
-                keyBindingFn={keyBindingFn}
-                handleKeyCommand={handleKeyCommand}
-                handleReturn={handleReturn}
-                onTab={onTab}
-                blockRendererFn={extendedBlockRenderMap}
-            />
-        </div>
-    )
+    handlePastedText = (text, html) => {
+        let newState = handleDraftEditorPastedText(html, this.props.editorState);
+
+        if (newState) {
+            this.props.onChange(newState);
+            return true;
+        }
+
+        return false;
+    }
+    render() {
+        return (
+            <div className='wysiwyg-editor'>
+                
+                <Editor 
+                    editorState={this.props.editorState} 
+                    onChange={this.props.onChange} 
+                    customStyleMap={{...colorStyleMap, ...HighlighterStyleMap}}
+                    keyBindingFn={this.keyBindingFn}
+                    handleKeyCommand={this.handleKeyCommand}
+                    blockRenderMap={extendedBlockRenderMap}
+                    ref={(ref) => this.editorRef = ref }
+                    handlePastedText={this.handlePastedText}
+                />
+            </div>
+        )
+    }
 }
 
 export default FormEditor;
