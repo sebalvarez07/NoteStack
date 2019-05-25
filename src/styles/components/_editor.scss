@@ -1,15 +1,25 @@
 .wysiwyg-editor {
-    height: 100%;
-    padding-top: 3rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    border-left: solid 1px $white;
-    border-right: solid 1px $white;
+    height: auto;
+    background: $white; 
+    padding: 2.5rem;
 }
 
 .DraftEditor-root {
-
     color: $grey-darker;
+    font-weight: 500;
+    
+    .DraftEditor-editorContainer > * {   
+        min-height: 100vh;
+    }
+
+    blockquote {
+        background: fade-out($grey-light, 0.4);
+        padding: 2.5rem 4rem;
+        border-left: solid 3px $blue;
+        font-style: italic;
+        color: $grey-text;
+        font-family: $font-fency;
+    }
 
     h2, h3, h4 {
         color: $grey-darker;
@@ -32,19 +42,13 @@
 }
 
 .editor-wrapper {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    position: relative;
     width: 100%;
-    height: calc(100vh - 11.1rem);
-    transition: all 0.5s ease;
-    
-}
-
-.header-collapse {
-    .editor-wrapper {
-        height: calc(100vh - 3.6rem);
-    }
+    height: auto;
+    padding-bottom: 2rem;
+    top: 0;
+    bottom: 0;
+    transition: all 0.5s ease;   
 }
 
 /* PrismJS 1.16.0

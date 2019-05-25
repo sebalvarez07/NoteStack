@@ -124,42 +124,31 @@ class NoteForm extends React.Component {
 
     render () {
         return (
-            <div className='note-page'>
-                <div className={`from ${this.props.noteStatus ? 'has-saved': 'not-saved'}`}>
-                    <NotePageHeader 
-                        noteID={this.props.note.id}
-                        title={this.state.title} 
-                        handleTitleOnChange={this.handleTitleOnChange} 
-                        subjectValue={this.state.subject}
-                        handleOnChangeSubject={this.handleOnChangeSubject}
-                        editorUI={
-                            <NoteUI
-                                editorState={this.state.editorState}
-                                onChange={this.onChange}
-                            />
-                        }
-                    />
-                    <div className='editor-wrapper'>
-                        <div className='content-container'>
-                            
-                            {
-                                this.state.subject === 'other' &&
-                                <div className='input-item__other'>
-                                    <input
-                                        placeholder='Enter New Subject'
-                                        className='input'
-                                        type='text'
-                                        value={this.state.newSubject}
-                                        onChange={this.handleNewSubject}
-                                    />
-                                </div>
-                            }
-                            
-                            <FormEditor editorRef={this.editorRef} onChange={this.onChange} editorState={this.state.editorState}/>
-                        </div>
+            
+            <React.Fragment>
+                <NotePageHeader 
+                    noteID={this.props.note.id}
+                    title={this.state.title} 
+                    handleTitleOnChange={this.handleTitleOnChange} 
+                    subjectValue={this.state.subject}
+                    handleOnChangeSubject={this.handleOnChangeSubject}
+                    handleNewSubject={this.handleNewSubject}
+                    newSubject={this.state.newSubject}
+                    editorUI={
+                        <NoteUI
+                            editorState={this.state.editorState}
+                            onChange={this.onChange}
+                        />
+                    }
+                />
+                <div className='editor-wrapper'>
+                    <div className='content-container'>
+                        
+                        <FormEditor editorRef={this.editorRef} onChange={this.onChange} editorState={this.state.editorState}/>
                     </div>
                 </div>
-            </div>   
+            </React.Fragment>
+            
         )
     }
 };

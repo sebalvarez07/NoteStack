@@ -87,13 +87,35 @@
     }
 }
 
-.color-picker {
+.noteUI-dropdown {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     &:focus, &:active {
         outline: none;
+    }
+    .dropdown__options {
+        position: absolute;
+        top: 100%;
+        background: $white;
+        padding: 1rem;
+        display: flex;
+    }
+    .code-options {
+        font-weight: bold;
+        color: $grey;
+        font-size: $font-size-xxs;
+        text-align: center;
+        margin: 1rem;
+        border-bottom: solid 2px transparent;
+        transition: all 0.5s ease;
+        cursor: pointer;
+
+        &:hover {
+            color: $blue;
+            border-bottom: solid 2px $blue;
+        }
     }
     .color__icon--text {
         cursor: pointer;
@@ -117,13 +139,6 @@
         background: #000;
         display: block;
     }
-    .color__options {
-        position: absolute;
-        top: 100%;
-        background: $white;
-        padding: 1rem;
-        display: flex;
-    }
     .icon-color {
         width: 2rem;
         height: 2rem;
@@ -132,3 +147,4 @@
         cursor: pointer;
     }
 }
+

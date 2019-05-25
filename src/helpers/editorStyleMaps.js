@@ -1,8 +1,4 @@
 export const BLOCKTYPES = [
-    {label: 'JS', style: 'codeBlockJS'},
-    {label: 'PHP', style: 'codeBlockPHP'},
-    {label: 'CSS', style: 'codeBlockCSS'},
-    {label: 'HTML', style: 'codeBlockHTML'},
     { label: 'UL', style: 'unordered-list-item'},
     { label: 'OL', style: 'ordered-list-item'},
     { label: 'QUOTE', style: 'blockquote' }
@@ -21,6 +17,13 @@ export const INLINETYPES = [
     { label: 'I', style: 'ITALIC' },
     { label: 'U', style: 'UNDERLINE' },
     // { label: 'Monospace', style: 'CODE' },
+];
+
+export const CODE_HIGHLIGHTERS = [
+    {label: 'JS', style: 'codeBlockJS'},
+    {label: 'PHP', style: 'codeBlockPHP'},
+    {label: 'CSS', style: 'codeBlockCSS'},
+    {label: 'HTML', style: 'codeBlockHTML'}
 ];
 
 export const colorStyleMap = {

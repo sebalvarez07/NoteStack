@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { RichUtils, Modifier, EditorState } from 'draft-js';
 import { colorStyleMap, HighlighterStyleMap  } from '../helpers/editorStyleMaps';
 import ToggleColorButton from './ToggleColorButton';
 
 const ToggleColorsUI = ({editorState, onChange }) => {
-
-    const [isTextColorActive, setIsTextColorActive] = useState(false);
-    const [isHightlightColorActive, setIsHightlightColorActive] = useState(false);
 
     const toggleColor = (toColor, styleMap) => {
         
@@ -60,20 +57,15 @@ const ToggleColorsUI = ({editorState, onChange }) => {
 
     return (
         <React.Fragment>
-
             <ToggleColorButton 
-                setDropdownState={setIsTextColorActive} 
                 className={'color__icon--text'} 
-                dropDownState={isTextColorActive} 
                 StyleMap={colorStyleMap}    
                 currentInlineStyle={currentInlineStyle}
                 handleToggleColor={handleToggleColor}
             />
 
             <ToggleColorButton 
-                setDropdownState={setIsHightlightColorActive} 
-                className={'color__icon--highlight'} 
-                dropDownState={isHightlightColorActive} 
+                className={'color__icon--highlight'}                 
                 StyleMap={HighlighterStyleMap}    
                 currentInlineStyle={currentInlineStyle}
                 handleToggleColor={handleToggleColor}

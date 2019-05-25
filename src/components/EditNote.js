@@ -17,14 +17,14 @@ class EditNote extends React.Component {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 { !!this.props.note && 
                     <NotePage
                         onSubmit={this.handleEditNote} 
                         note={this.props.note}
                     />
                 }
-            </div>
+            </React.Fragment>
         )
     }
 };

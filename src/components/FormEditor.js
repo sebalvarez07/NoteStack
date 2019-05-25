@@ -21,18 +21,26 @@ class FormEditor extends React.Component {
         
         const editorState = this.props.editorState;
 
-        const newState = RichUtils.handleKeyCommand(editorState, command);
+        let newState;
+
+        if (CodeUtils.hasSelectionInBlock(editorState)) {
+        newState = CodeUtils.handleKeyCommand(editorState, command);
+        }
+
+        if (!newState) {
+        newState = RichUtils.handleKeyCommand(editorState, command);
+        }
 
         if (newState) {
-            this.props.onChange(newState);
-            return 'handled';
+        this.props.onChange(newState);
+        return 'handled';
         }
         return 'not-handled';
     };
 
     keyBindingFn = (evt) => {
         const editorState = this.props.editorState;
-        if (!CodeUtils.hasSelectionInBlock(editorState)) return Draft.getDefaultKeyBinding(evt);
+        // if (!CodeUtils.hasSelectionInBlock(editorState)) return Draft.getDefaultKeyBinding(evt);
 
         const command = CodeUtils.getKeyBinding(evt);
 
@@ -41,17 +49,28 @@ class FormEditor extends React.Component {
 
     handleReturn = (evt) => {
         const editorState = this.props.editorState;
-        if (!CodeUtils.hasSelectionInBlock(editorState)) return 'not-handled';
+        // if (!CodeUtils.hasSelectionInBlock(editorState)) return 'not-handled';
 
-        this.props.onChange(CodeUtils.handleReturn(evt, editorState));
-        return 'handled';
+        if(evt.shiftKey){
+            this.props.onChange(CodeUtils.handleReturn(evt, editorState));
+            return 'handled';
+        }
     }
 
     onTab = (evt) => {
         const editorState = this.props.editorState;
-        if (!CodeUtils.hasSelectionInBlock(editorState)) return 'not-handled';
+        // if (!CodeUtils.hasSelectionInBlock(editorState)) return 'not-handled';
 
-        this.props.onChange(CodeUtils.onTab(evt, editorState));
+        let newState;
+        if (evt.shiftKey) {
+            // since backspace removes tabs in CodeUtils 
+            // https://github.com/SamyPesse/draft-js-code/blob/9783c0f6bbedda6b7089712f9c657a72fdae636d/lib/handleKeyCommand.js#L11
+            newState = CodeUtils.handleKeyCommand(editorState, 'backspace');
+        } else {
+            // let CodeUtils insert tabs
+            newState = CodeUtils.onTab(evt, editorState);
+        }
+        this.props.onChange(newState);
         return 'handled';
     }   
 
@@ -68,13 +87,15 @@ class FormEditor extends React.Component {
     render() {
         return (
             <div className='wysiwyg-editor'>
-                
                 <Editor 
+                    handleReturn={this.handleReturn}
+                    keyBindingFn={this.keyBindingFn}
                     editorState={this.props.editorState} 
                     onChange={this.props.onChange} 
                     customStyleMap={{...colorStyleMap, ...HighlighterStyleMap}}
                     keyBindingFn={this.keyBindingFn}
                     handleKeyCommand={this.handleKeyCommand}
+                    onTab={this.onTab}
                     blockRenderMap={extendedBlockRenderMap}
                     ref={(ref) => this.editorRef = ref }
                     handlePastedText={this.handlePastedText}

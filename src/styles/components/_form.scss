@@ -18,6 +18,20 @@
     }
 }
 
+.note-form-group__subject {
+    display: flex;
+    align-items: center;
+
+    .note-form-item {
+        .input {
+            font-size: $font-size-xxs;
+            padding: 0.1rem 1rem;
+            background: $grey-light;
+            line-height: 1;
+        }
+    }
+}
+
 .note-form-item {
     display: flex;
     align-items: center;
@@ -35,12 +49,12 @@
         .input {
             font-size: $font-size-sm;
             min-width: 30rem;
-            line-height: unset;
+            line-height: 1;
         }
     }
 
     &.note-form__subject {
-        padding-bottom: 0.6rem;
+        
         .note-form__label {
             font-size: $font-size-xxs;
         }

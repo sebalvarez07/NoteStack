@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ToggleColorButton = (props) => {
-
+ 
     let active__style = Object.keys(props.StyleMap).find(style => {
         return props.currentInlineStyle.has(style);
     });
 
     active__style = active__style ? props.StyleMap[active__style] : undefined;
 
+    const [dropDownState, setDropdownState] = useState(false);
+
     return (
-        <div className='color-picker note-ui__item' tabIndex={0} onBlur={() => props.setDropdownState(false)}>
+        <div className='noteUI-dropdown note-ui__item' tabIndex={0} onBlur={() => setDropdownState(false)}>
                 <div 
                     className={`${props.className}`}
-                    onMouseDown={() => props.setDropdownState(!props.dropDownState)}
+                    onMouseDown={() => setDropdownState(!props.dropDownState)}
                     >
                     {
                         props.className === 'color__icon--text' ? 
@@ -26,8 +28,8 @@ const ToggleColorButton = (props) => {
                             )
                     }
                 </div>
-                { props.dropDownState && 
-                    <div className='color__options'>
+                { dropDownState && 
+                    <div className='dropdown__options'>
                         {
                             Object.keys(props.StyleMap).map(color => {
                                 return (

@@ -22,22 +22,37 @@ const NotePageHeader = (props) => {
                                 placeholder={'Title Undefined'}
                             />
                         </div>
-
-                        <div className='note-form-item note-form__subject'>
-                            <label htmlFor='subject-select' className='note-form__label'>Subject: </label>
-                            <select
-                                id='subject-select'
-                                className='select'
-                                value={props.subjectValue} 
-                                onChange={props.handleOnChangeSubject}
-                            >
-                                <option value=''>No Subject</option>
-                                {
-                                    props.subjects.map(subject => <option key={subject} value={subject}>{subject}</option>)                                                                               
-                                }
-                                <option value='other'>Other</option>
-                            </select>
-                            { /* <i className="ionicons ion-chevron-down"></i> */ }
+                        <div className='note-form-group__subject'>
+                            <div className='note-form-item note-form__subject'>
+                                <label htmlFor='subject-select' className='note-form__label'>Subject: </label>
+                                <select
+                                    id='subject-select'
+                                    className='select'
+                                    value={props.subjectValue} 
+                                    onChange={props.handleOnChangeSubject}
+                                >
+                                    <option value=''>No Subject</option>
+                                    {
+                                        props.subjects.map(subject => <option key={subject} value={subject}>{subject}</option>)                                                                               
+                                    }
+                                    <option value='other'>Other</option>
+                                </select>
+                                { /* <i className="ionicons ion-chevron-down"></i> */ }
+                            </div>
+                            {
+                                props.subjectValue === 'other' &&
+                                <div className='note-form-item note-form__subject'>
+                                    <label htmlFor='new-subject__input' className='note-form__label'>New Subject: </label>
+                                    <input
+                                        id='new-subject__input'
+                                        placeholder='Enter New Subject'
+                                        className='input'
+                                        type='text'
+                                        value={props.newSubject}
+                                        onChange={props.handleNewSubject}
+                                    />
+                                </div>
+                            }
                         </div>
                     </div>
                 }

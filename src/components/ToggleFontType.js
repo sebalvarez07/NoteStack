@@ -9,7 +9,7 @@ const ToggleFontTypes = (props) => {
         <div className='note-ui__item font-types note-item__subject'>
             <select 
                 value={ isFontType ? props.currentTypeBlock : 'no_value'} 
-                onChange={e => props.toggleBlockUI(e.target.value)}
+                onChange={e => props.toggleBlockUI(e, e.target.value)}
                 className='select select--font-type'
                 >
                 { 

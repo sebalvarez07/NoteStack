@@ -4,6 +4,7 @@ import { BLOCKTYPES  } from '../helpers/editorStyleMaps';
 import ToggleColorsUI from './ToggleColorsUI';
 import ToggleFontStyles from './ToggleFontStyle';
 import ToggleFontTypes from './ToggleFontType';
+import ToggleCodeHighlighters from './ToggleCodeHighlighters';
 
 const NoteUI = ({editorState, onChange }) => {
 
@@ -13,10 +14,9 @@ const NoteUI = ({editorState, onChange }) => {
                     .getCurrentContent()
                     .getBlockForKey(selection.getStartKey())
                     .getType();
- 
-    const currentInlineStyle = editorState.getCurrentInlineStyle();
 
-    const toggleBlockUI = (blockToggled) => {
+    const toggleBlockUI = (e, blockToggled) => {
+        e.preventDefault();
         const curSelection = editorState.getSelection();
         const nextEditorState = EditorState.forceSelection(editorState, curSelection);
         onChange(RichUtils.toggleBlockType(nextEditorState, blockToggled));
@@ -27,18 +27,17 @@ const NoteUI = ({editorState, onChange }) => {
             
             <ToggleFontTypes currentTypeBlock={currentTypeBlock} toggleBlockUI={toggleBlockUI} />
             <ToggleColorsUI onChange={onChange} editorState={editorState}/>
-            <ToggleFontStyles onChange={onChange} editorState={editorState} currentInlineStyle={currentInlineStyle} />
+            <ToggleFontStyles onChange={onChange} editorState={editorState} />
+            <ToggleCodeHighlighters currentTypeBlock={currentTypeBlock} toggleBlockUI={toggleBlockUI } />
+
             
             { BLOCKTYPES.map(blocktype => {
                 return (
                     <span 
                         key={blocktype.label}
-                        onMouseDown={ e =>  { 
-                            e.preventDefault(); 
-                            toggleBlockUI(blocktype.style)}
-                        }
+                        onMouseDown={ e => toggleBlockUI(e, blocktype.style)}
                         className={
-                            `btn--rich-text ${currentTypeBlock === blocktype.style ? 'active' : ''}`
+                            `note-ui__item ${currentTypeBlock === blocktype.style ? 'active' : ''}`
                         }
                     >
                         {blocktype.label}
