@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
+import { setSidebarToCollapsed } from '../actions/collapsers';
 
 export const PrivateRoute = ({ isAuthenticated, component: Component, ...rest }) => {
+
+    useEffect(()=>{
+        if(window.innerWidth < 1200 ){
+            rest.setSidebarToCollapsed();
+        }
+    }, []);
 
         return (
             <Route {...rest} component={(props) => (
                 isAuthenticated ? (
                     <div className={`wrapper ${ rest.sidebarCollapsed ? 'sidebar-collapse' : '' } ${ rest.headerCollapsed ? 'header-collapse' : '' }` }>
                         <Sidebar />
+                        { !rest.sidebarCollapsed && <div className='sidebar-overlay--mobile'></div> }
                         <div className='content-page'>
                             <Component {...props} />
                         </div>
@@ -28,7 +36,11 @@ const mapStateToProps = (state) => ({
     sidebarCollapsed: state.collapseStatus.sidebarCollapsed,
 });
 
-export default connect(mapStateToProps)(PrivateRoute);
+const mapDispatchToProps = (dispatch) => ({
+    setSidebarToCollapsed: () => dispatch(setSidebarToCollapsed())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute);
 
 /*
     NOTES:

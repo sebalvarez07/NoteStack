@@ -5,6 +5,7 @@ import HeaderCollapseButton from './HeaderCollapseButton';
 import SidebarCollapseButton from './SidebarCollapseButton';
 import RemoveNoteButton from './RemoveNoteButton';
 import getSubject from '../selectors/subjects';
+import FavouriteNoteButton from './FavouriteNoteButton';
 
 const NotePageHeader = (props) => {
 
@@ -69,14 +70,10 @@ const NotePageHeader = (props) => {
                         </div>
                         
                         <div className='header__right-side'>
-                            <span className={`h-border-sides h-w40 flex-middle`}>
-                                <button
-                                    onClick={props.onSubmit}
-                                    className={`header-icon header-icon--xs`}>
-                                    <i className="ionicons ion-android-favorite"></i>
-                                </button>
+                            <span className={`h-border-sides h-w40`}>
+                                <FavouriteNoteButton noteID={props.noteID} />
                             </span>
-                            <span className={`h-border-sides h-w40 flex-middle`}>
+                            <span className={`h-border-sides h-w40`}>
                                 <RemoveNoteButton noteID={props.noteID}/>
                             </span>
                             

@@ -13,7 +13,8 @@ export const startAddNote = ({
         dateCreated = moment().valueOf(), 
         rawData = '',
         textContent = '',
-        subject = ''
+        subject = '',
+        isFavourite = false
     } = {}
     ) => {
     return (dispatch, getState) => {
@@ -21,7 +22,7 @@ export const startAddNote = ({
         const rawDataJSON = JSON.stringify(rawData);
 
         const uid = getState().auth.uid;
-        const noteParsed = {title, dateCreated, rawData: rawDataJSON, textContent, subject}
+        const noteParsed = {title, dateCreated, rawData: rawDataJSON, textContent, subject, isFavourite}
 
         return database.ref(`users/${uid}/notes`).push(noteParsed).then((ref) => {
             dispatch(addNote({
@@ -46,15 +47,28 @@ export const startEditNote = (id, updates) => {
     return (dispatch, getState) => {
 
         const uid = getState().auth.uid;
-        const rawDataJSON = JSON.stringify(updates.rawData);
 
-        return database.ref(`users/${uid}/notes/${id}`).update({
-            ...updates,
-            rawData: rawDataJSON
-        })
-        .then(()=> {
-            dispatch(editNote(id, updates));
-        });
+        // If note is edited from the editor
+        if(!!updates.rawData){
+            const rawDataJSON = JSON.stringify(updates.rawData);
+
+            return database.ref(`users/${uid}/notes/${id}`).update({
+                ...updates,
+                rawData: rawDataJSON
+            })
+            .then(()=> {
+                dispatch(editNote(id, updates));
+            });
+        }
+        else {
+            // If favourte status is updated (rather than creating a whole action)
+            return database.ref(`users/${uid}/notes/${id}`).update({
+                ...updates,
+            })
+            .then(()=> {
+                dispatch(editNote(id, updates));
+            });
+        }
     };
 };
 

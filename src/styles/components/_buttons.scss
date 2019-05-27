@@ -7,6 +7,7 @@
     display: inline-block;
     line-height: 1;
     border-radius: 100px;
+    cursor: pointer;
     box-shadow: 0 0 1rem fade-out($grey-darker, 0.9);
 
     &:focus, &:active {
@@ -21,8 +22,8 @@
     box-shadow: 0 0 1rem fade-out($blue, 0.9);
 
     &:hover {
-        background: $white;
-        color: $blue;
+        background: fade-out($blue, 0.1);
+        box-shadow: 0 0 1rem fade-out($blue, 0.8);
     }
 }
 
@@ -46,6 +47,11 @@
 .btn--grey {
     background: $grey;
     color: $white;
+    transition: all 0.5s ease;
+
+    &:hover {
+        background: fade-out($grey, 0.2);
+    }
 }
 
 .btn--rich-text {

@@ -29,25 +29,50 @@ const RemoveNoteButton = (props) => {
 
     return (
         <React.Fragment>
-            <button
-                onClick={handleOpenModal}
+            <span
+                onMouseDown={handleOpenModal}
                 className='header-icon header-icon--xs'>
                 <i className="ionicons ion-trash-b"></i>
-            </button>
+            </span>
             <ReactModal 
+                className='modal modal--remove-note'
                 isOpen={showModal}
-                >
-                Are you sure you want to delete this note? This action cannot be undone.
-                <button
-                    onClick={handleCancelRemove}
-                    >
-                    Cancel
-                </button>
-                <button
-                    onClick={handleRemoveNote}
-                    >
-                    Remove Note
-                </button>
+                overlayClassName='modal__overlay'
+                >    
+                <span 
+                    onMouseDown={handleCancelRemove}
+                    className='modal__close'>
+                    <i className="ionicons ion-close"></i>
+                </span>
+                
+
+                <div className='modal__body'>
+                    <span className='warning-icon'>
+                        <i class="ionicons ion-android-alert"></i>
+                    </span>
+                    <div className='modal-remove__msg'>
+                        <span className='d3'>
+                            Are you sure you want to delete this note?
+                        </span>
+                        <span className='d5'>
+                            This action cannot be undone.
+                        </span>
+                    </div>
+                </div>
+                <div className='modal__footer'>
+                    <span
+                        className='btn btn--grey'
+                        onMouseDown={handleCancelRemove}
+                        >
+                        Cancel
+                    </span>
+                    <span
+                        className='btn btn--blue'
+                        onMouseDown={handleRemoveNote}
+                        >
+                        Remove Note
+                    </span>
+                </div>
             </ReactModal>
         </React.Fragment>
     )

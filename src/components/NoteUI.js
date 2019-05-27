@@ -5,6 +5,7 @@ import ToggleColorsUI from './ToggleColorsUI';
 import ToggleFontStyles from './ToggleFontStyle';
 import ToggleFontTypes from './ToggleFontType';
 import ToggleCodeHighlighters from './ToggleCodeHighlighters';
+import BlockIconUI from './BlockIconUI';
 
 const NoteUI = ({editorState, onChange }) => {
 
@@ -30,18 +31,15 @@ const NoteUI = ({editorState, onChange }) => {
             <ToggleFontStyles onChange={onChange} editorState={editorState} />
             <ToggleCodeHighlighters currentTypeBlock={currentTypeBlock} toggleBlockUI={toggleBlockUI } />
 
-            
             { BLOCKTYPES.map(blocktype => {
                 return (
-                    <span 
-                        key={blocktype.label}
-                        onMouseDown={ e => toggleBlockUI(e, blocktype.style)}
-                        className={
-                            `note-ui__item ${currentTypeBlock === blocktype.style ? 'active' : ''}`
-                        }
-                    >
-                        {blocktype.label}
-                    </span>
+                    <BlockIconUI 
+                        key={blocktype.label} 
+                        toggleBlockUI={toggleBlockUI} 
+                        nameClass={`note-ui__item ${currentTypeBlock === blocktype.style ? 'active' : ''}`}
+                        iconImg={blocktype.label}
+                        blockStyle={blocktype.style}
+                    />
                 )
             }) 
             }

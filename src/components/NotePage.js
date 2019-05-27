@@ -78,9 +78,17 @@ class NoteForm extends React.Component {
 
     onChange = (editorState) => {
 
-        this.setState({
-            editorState: EditorState.set(editorState, { decorator })
-        });
+        try{
+            this.setState({
+                editorState: EditorState.set(editorState, { decorator })
+            });    
+        }
+        catch(error){
+            if(error.name === 'TypeError' && error.message.indexOf('getImmutable') !== -1){
+                // console.log('Immutable Error');
+            }
+        }
+        
     };    
 
     onSubmit = () => {
@@ -142,7 +150,7 @@ class NoteForm extends React.Component {
                     }
                 />
                 <div className='editor-wrapper'>
-                    <div className='content-container'>
+                    <div className='content-container content-container--editor'>
                         
                         <FormEditor editorRef={this.editorRef} onChange={this.onChange} editorState={this.state.editorState}/>
                     </div>

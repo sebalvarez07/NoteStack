@@ -7,12 +7,13 @@ const ToggleCodeHighlights = (props) => {
 
     return (
         <div className='noteUI-dropdown note-ui__item' tabIndex={0} onBlur={() => setDropdownState(false)}>
-            <div 
-                className='code-highlight__icon'
-                onMouseDown={e => setDropdownState(!dropDownState)}
-                >
-                CODE
-            </div>
+            
+            <span 
+                onMouseDown={ e => setDropdownState(!dropDownState) }
+                className='flex-middle'
+            >
+                <img className='block-UI__icon-svg' src={`/images/UI-icons/CODE.svg`}/>
+            </span>
             { dropDownState && 
                 <div className='dropdown__options'>
                     {

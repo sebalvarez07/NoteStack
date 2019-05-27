@@ -14,7 +14,7 @@ const ToggleColorButton = (props) => {
         <div className='noteUI-dropdown note-ui__item' tabIndex={0} onBlur={() => setDropdownState(false)}>
                 <div 
                     className={`${props.className}`}
-                    onMouseDown={() => setDropdownState(!props.dropDownState)}
+                    onMouseDown={() => setDropdownState(!dropDownState)}
                     >
                     {
                         props.className === 'color__icon--text' ? 
@@ -22,7 +22,11 @@ const ToggleColorButton = (props) => {
                                 <span className='text-color__active-icon' style={active__style ? {background: active__style.color} : {}}></span> 
                             ) : (  
                                 <React.Fragment>
-                                    <img className='highlight-icon' src='/images/highlighter_icon.svg' />
+                                    <span 
+                                        className='flex-middle ui-icon__container'
+                                    >
+                                        <img className='block-UI__icon-svg' src={`/images/UI-icons/highlighter.svg`}/>
+                                    </span>
                                     <span className='highlight__active' style={active__style ? {background: active__style.backgroundColor} : {}}></span> 
                                 </React.Fragment>
                             )
@@ -33,18 +37,31 @@ const ToggleColorButton = (props) => {
                         {
                             Object.keys(props.StyleMap).map(color => {
                                 return (
-                                    <span
+                                    <div 
                                         key={color}
                                         onMouseDown={ e => props.handleToggleColor(e, color, props.StyleMap) }
+
                                         style={ 
                                             props.className === 'color__icon--text' ?  
-                                                { backgroundColor: color } 
+                                                props.currentInlineStyle.has(color) ? { backgroundColor: color } : {}
                                             : 
-                                                { backgroundColor: props.StyleMap[color].backgroundColor }
+                                                props.currentInlineStyle.has(color) ? { backgroundColor: props.StyleMap[color].backgroundColor } : {}
                                         }
-                                        className={`icon-color ${props.currentInlineStyle.has(color) ? 'active' : ''}`}
-                                        >
-                                    </span>                
+
+                                        className={`icon-color__container ${props.currentInlineStyle.has(color) ? 'active' : ''}`}
+                                    >
+                                        <span     
+                                            style={ 
+                                                props.className === 'color__icon--text' ?  
+                                                    { backgroundColor: color } 
+                                                : 
+                                                    { backgroundColor: props.StyleMap[color].backgroundColor }
+                                            }
+                                            className={'icon-color'}
+                                            >
+                                            { props.currentInlineStyle.has(color) && <i className="ionicons ion-checkmark"></i> }
+                                        </span>                
+                                    </div>
                                 )
                             })
                         }

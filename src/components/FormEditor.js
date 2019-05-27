@@ -51,7 +51,7 @@ class FormEditor extends React.Component {
         const editorState = this.props.editorState;
         // if (!CodeUtils.hasSelectionInBlock(editorState)) return 'not-handled';
 
-        if(evt.shiftKey){
+        if(evt.shiftKey || evt.ctrlKey || evt.altKey){
             this.props.onChange(CodeUtils.handleReturn(evt, editorState));
             return 'handled';
         }
@@ -65,6 +65,7 @@ class FormEditor extends React.Component {
         if (evt.shiftKey) {
             // since backspace removes tabs in CodeUtils 
             // https://github.com/SamyPesse/draft-js-code/blob/9783c0f6bbedda6b7089712f9c657a72fdae636d/lib/handleKeyCommand.js#L11
+            evt.preventDefault();
             newState = CodeUtils.handleKeyCommand(editorState, 'backspace');
         } else {
             // let CodeUtils insert tabs

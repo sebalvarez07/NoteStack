@@ -13,16 +13,13 @@ class CodeCustomBlock extends React.Component {
     );
   }
 }
-    
+
 const codeBlock = Immutable.Map({
     'unstyled': {
       element: 'div',
-      // will be used in convertFromHTMLtoContentBlocks
       aliasedElements: ['p'],
     },
     'codeBlockJS': {
-    // element is used during paste or html conversion to auto match your component;
-    // it is also retained as part of this.props.children and not stripped out
     element: 'span',
     wrapper: <CodeCustomBlock nameClass='language-javascript'/>,
     },

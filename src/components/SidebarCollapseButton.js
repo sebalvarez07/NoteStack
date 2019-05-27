@@ -17,7 +17,7 @@ const SidebarCollapseButton = (props) => {
         <button 
             onClick={handleSidebarCollapse}
             className='sidebar-collapser__btn h-border-sides'>
-            <i className="ionicons ion-chevron-left"></i>
+            { props.sidebarCollapsed ? <i className="ionicons ion-search"></i> : <i className="ionicons ion-chevron-left"></i> }
         </button>
     );
 }

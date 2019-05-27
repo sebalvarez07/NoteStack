@@ -1,0 +1,110 @@
+.modal {
+    width: 60rem;
+    margin: 0 auto;
+    background: $white;
+    position: fixed;
+    top: 20%;
+    left: 0;
+    right: 0;
+    // transform: translateY(-50%);
+
+    &:focus, &:active {
+        outline: none;
+    }
+    
+    .modal__head {
+        border-bottom: solid 1px $grey-light;
+        padding: 1.5rem 2rem;
+        position: relative;
+
+        .modal__close {
+            width: 6.5rem;
+            height: 100%;
+            border-left: solid 1px $grey-light;
+        }
+    }
+
+    .modal__body {
+        padding: 1.5rem 2rem;
+    }
+
+    .modal__footer {
+        padding: 1.5rem 2rem 3rem;
+        display: flex;
+        justify-content: center;
+
+        .btn {
+            width: 15rem;
+            text-align: center;
+            &:nth-child(2) {
+                margin-left: 1rem;
+            }
+        }
+    }
+
+    .modal__title {
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: $grey;
+    }
+
+    .modal__close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 6.5rem;
+        height: 6.5rem;
+        background: $white;
+        cursor: pointer;
+        color: $grey;
+        transition: all 0.5s ease;
+
+        &:hover {
+            background: $grey-light;
+        }
+    }
+}
+
+.modal__overlay {
+    background: fade-out($grey-darker, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+// Remove note
+.warning-icon {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+
+    .ionicons {
+        position: relative;
+        z-index: 1;
+        font-size: 12rem;
+        color: darken($grey-light, 2%);
+    }
+}
+
+.modal-remove__msg {
+    text-align: center;
+    .d3 {
+        display: block;
+        color: $grey-darker;
+        font-weight: 500;
+        margin-bottom: 0;
+    }
+
+    .d5 {
+        color: $grey;
+        font-weight: 500;
+        display: block;
+        margin-top: 0;
+    }
+}

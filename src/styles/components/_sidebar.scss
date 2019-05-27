@@ -3,7 +3,7 @@
    top: 0;
    left: 0;
    height: 100%;
-   width: 38.5rem;
+   width: 40.5rem;
    display: block;
    transform: translateX(0);
    z-index: 1000;
@@ -12,30 +12,83 @@
    &.collapse {
       transform: translateX(-100%);
    }
-   
+
+   @include breakpoint(lg){
+      width: 38.5rem;
+   }
 }
 
 .sidebar__content {
    background: $white;
    overflow-y: scroll;
-   padding: 4rem;
+   padding: 2rem;
    height: 100%;
+   position: relative;
 }
 
 .content-page {
    position: absolute;
    height: 100%;
-   width: calc(100% - 38.5rem);
+   width: 100%;
    right: 0;
    top: 0;
    overflow-y: scroll;
    background: $grey-light;
    transition: all 0.5s ease;
+
+   @include breakpoint(lg){
+      width: calc(100% - 38.5rem);
+   }
+}
+
+.sidebar-collapser--mobile {
+   position: absolute;
+   right: 0;
+   transform: translateX(100%);
+   top: 0;
+   height: 7.5rem;
+   width: 4rem;
+   background: white;
+
+   .sidebar-collapser__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      box-shadow: none;
+      outline: none;
+      color: $grey;
+      width: 100%;
+      background: $white;
+      height: 100%;
+  }
+ 
+ .ionicons {
+    font-size: $font-size-sm;
+ }
+}
+
+.sidebar-overlay--mobile {
+   width: 100%;
+   height: 100%;
+   background: fade-out($grey-darker, 0.7);
+   visibility: visible;
+   position: fixed;
+   z-index: 100;
+
+   @include breakpoint(lg){
+      display: none;
+   }
 }
 
 .sidebar-collapse {
    .sidebar {
       transform: translateX(-100%);
+   }
+
+   .sidebar-overlay--mobile {
+      visibility: hidden;
+      background: transparent;
    }
 
    .content-page {

@@ -35,10 +35,15 @@ const NotesFilters = (props) => {
         <div className='search-ui'>
             <div className='input-search__text'>
                 <input 
+                    id='search-input'
                     className='input-text' 
                     type='text' value={textSearch} 
                     onChange={handleOnChangeText} 
-                    placeholder='Search Notes'/>
+                    placeholder='Search Notes'
+                />
+                <label htmlFor='search-input' className='search-input__label'>
+                    <i className="ionicons ion-android-search"></i>
+                </label>
             </div>
             <div className='flexer space-between'>
                 <div className='input-search__filter'>

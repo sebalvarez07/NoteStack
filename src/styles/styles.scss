@@ -1,5 +1,6 @@
 @import 'base/settings';
 @import 'base/base';
+@import 'base/responsive';
 @import 'components/box-layout';
 @import 'components/buttons';
 @import 'components/header';
@@ -14,3 +15,4 @@
 @import 'components/profile-dropdown';
 @import 'components/editor';
 @import 'components/note-ui';
+@import 'components/modal';

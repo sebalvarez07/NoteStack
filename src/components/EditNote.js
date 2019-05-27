@@ -1,7 +1,7 @@
 import React from 'react';
 import NotePage from './NotePage';
 import { connect } from 'react-redux';
-import { startEditNote, startRemoveNote } from '../actions/notes';
+import { startEditNote } from '../actions/notes';
 
 class EditNote extends React.Component {
  
@@ -30,8 +30,7 @@ class EditNote extends React.Component {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    startEditNote: (id, updates) => dispatch(startEditNote(id, updates)),
-    startRemoveNote: (id) => dispatch(startRemoveNote(id, updates))
+    startEditNote: (id, updates) => dispatch(startEditNote(id, updates))
 });
 
 const mapStateToProps = (state, props) => ({
