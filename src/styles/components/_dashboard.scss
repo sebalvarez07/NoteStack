@@ -1,0 +1,35 @@
+.dash-group {
+    margin-bottom: 5rem;
+
+    .d4 {
+        color: $grey-darker;
+    }
+}
+
+.dashboard-container {
+    padding-top: 14rem;
+
+    .d4 {
+        margin-bottom: 2rem;
+    }
+
+    .dashoard__load-more {
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-decoration: underline;
+        color: fade-out($grey-darker, 0.3);
+        display: inline-block;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:nth-child(2) {
+            margin-left: 1.5rem;
+            padding-left: 1.5rem;
+            border-left: solid 1px $grey-darker;
+        }
+
+        &:hover {
+            color: $grey-darker;
+        }
+    }
+}
