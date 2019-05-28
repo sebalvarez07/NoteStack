@@ -104,7 +104,7 @@ class NoteForm extends React.Component {
         const rawData = convertToRaw(currentContent);
         
         this.props.onSubmit({
-            title: this.state.title,
+            title: this.state.title.trim(),
             textContent: currentContent.getPlainText().trim(),
             dateCreated: moment().valueOf(),
             rawData,
@@ -127,7 +127,10 @@ class NoteForm extends React.Component {
 
     handleNewSubject = (e) => {
         const value = e.target.value;
-        this.setState({ newSubject: value });
+        if(value.length < 20) {
+            this.setState({ newSubject: value });
+        }
+        
     };
 
     render () {

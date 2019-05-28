@@ -1,12 +1,14 @@
 .search-ui {
     width: 100%;
     margin-bottom: 3rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
 }
 
 .input-search__text {
     border-bottom: solid 1px $grey;
-    margin-bottom: $s-size;
-    padding-bottom: $s-size;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
     position: relative;
 
     .search-input__label {

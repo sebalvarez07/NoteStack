@@ -11,7 +11,7 @@ const Sidebar = (props) => {
                 <NotesFilters />
                 <NotesList />
             </div>
-            <span className='sidebar-collapser--mobile'>
+            <span className={`sidebar-collapser--mobile`}>
                 <SidebarCollapseButton />
             </span>
         </div>

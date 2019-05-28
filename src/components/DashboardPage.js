@@ -1,28 +1,64 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
+import { connect } from 'react-redux';
+import FavouriteList from './FavouriteList';
+import filterNotes from '../selectors/filterNotes';
+import WelcomeWidget from './WelcomeWidget';
 
 const DashboardPage = (props) => (
 
-    <div className='wrapper-inner'>
-        <Header 
-            sidebarCollapseButton={props.sidebarCollapseButton}
-            left_side={
-                <h1 className='d2'>Dashboard</h1>
+    <React.Fragment>
+        <div className='header-wrapper'>
+            <Header 
+                sidebarCollapseButton={props.sidebarCollapseButton}
+                left_side={
+                    <h1 className='d2'>Dashboard</h1>
+                }
+            />
+        </div>
+
+        <div className='dashboard-container'>
+            <div className='content-container'>
+
+            { props.latestNotes.length === 0 && props.faveNotes.length === 0 && 
+                <WelcomeWidget />
             }
-            right_side={
-                <div className='header-right__added'>
-                    <Link 
-                        to='/addNote'
-                        className='btn btn--blue'>
-                        <span className='margin-right--sm'>+</span> Create Note
-                    </Link>
+                
+            { props.faveNotes.length !== 0 && 
+                <div className='dash-group'>
+                    <h2 className='d4'>
+                        Favourite Notes
+                    </h2>
+                    <FavouriteList notes={props.faveNotes}/>
                 </div>
             }
-        />
-
-
-    </div>
+                
+            { props.latestNotes.length !== 0 && 
+                <div className='dash-group'>
+                    <h2 className='d4'>
+                        Most Recently Updated/Created
+                    </h2>
+                    <FavouriteList notes={props.latestNotes}/>
+                </div>
+            }
+            </div>
+        </div>
+    </React.Fragment>
 );
 
-export default DashboardPage;
+const latestFiler = {
+    text: '',
+    title: '',
+    textContent: '',
+    subject: 'all_subjects',
+    sortBy: 'latest'
+
+}
+
+const mapStateToProps = (state) => ({
+    faveNotes: state.notes.filter(note => note.isFavourite === true),
+    latestNotes: filterNotes(state.notes, latestFiler),
+});
+
+export default connect(mapStateToProps)(DashboardPage);

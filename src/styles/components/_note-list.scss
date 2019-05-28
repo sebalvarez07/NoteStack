@@ -1,13 +1,79 @@
 .preview-single {
     display: block;
     text-decoration: none;
+    background: $white;
+    transition: all 0.5s ease;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    &:hover {
+        background: $grey-light;
+        .preview-single__controls {
+            transform: translateX(0);
+            background: $grey-light;
+        }
+    }
+}
+
+.preview-single__container {
+    position: relative;
+    padding-right: 2rem;
+    overflow: hidden;
+    border-bottom: solid 1px $grey-light;
+} 
+
+.preview-single__link {
+    text-decoration: none;
+    display: block;
     padding: 1.5rem 0;
-    border-bottom: solid 1px $grey;
+}
+
+.preview-single__controls {
+    right: 0;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    transform: translateX(100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $white;
+    transition: all 0.5s ease;
+
+    .preview-single__favourite{
+        margin-right: 1rem;
+    }
+}
+
+.preview-single__control {
+    
+    .header-icon {
+        cursor: pointer;
+        border-radius: 100%;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: $grey-light;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .ionicons {
+            line-height: 3rem;
+            font-size: 1.4rem;
+        }
+    }
+
+    &.preview-single__remove {
+        .header-icon {
+                .ionicons {
+                font-size: 1.6rem;
+            }   
+        }
+    }
 }
 
 .preview__subject, .preview__title, .preview__date{
     font-family: $font-main;
     margin: 0;
+    text-decoration: none;
 }
 
 .preview__date-subject {
@@ -24,7 +90,7 @@
 }
 
 .preview__title {
-    font-size: $font-size-md;
+    font-size: $font-size-sm;
     color: $grey-darker;
     display: inline-block;
     font-weight: 400;
@@ -36,4 +102,132 @@
     color: $grey;
     letter-spacing: 0.15rem;
     font-weight: 500;
+}
+
+
+// ---------- NOTE LIST DASHBOARD ---------- //
+
+$padder-top: 2rem;
+$padder-sides: 2rem;
+
+.fave-note__card {
+    background: $white;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.fave-note__main-content {
+    flex: 1;
+    overflow: hidden;
+    color: $grey-darker;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.fave-note__date {
+    text-align: center;
+    padding: $padder-top $padder-sides;
+    position: relative;
+
+    &:before {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 70%;
+        right: 0;
+        top: 50%;
+        background: $grey-light;
+        position: absolute;
+        right: 0;
+        transform: translateY(-50%);
+    }
+
+    .fave-note__day {
+        display: block;
+        font-size: 2rem;
+        font-weight: 500;
+        color: $grey;
+        line-height: 1;
+    }
+
+    .fave-note__month {
+        display: block;
+        font-size: 1.4rem;
+        color: $grey-darker;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+}
+
+.fave-note__content {
+    padding: $padder-top $padder-sides;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+
+    .fave-note__title, .fave-note__text-content {
+        display: block;
+        margin: 0;
+        line-height: 1;
+    }
+
+    .fave-note__title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: $grey-darker;
+        font-weight: 500;
+        text-overflow: ellipsis;
+    }
+
+    .fave-note__text-content {
+        font-size: 1.6rem;
+        color: $grey;
+        line-height: 1.2;
+        font-weight: 500;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+}
+
+.fave-note__right {
+    padding-left: 10rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .fave-note__subject {
+        font-size: 1.4rem;
+        padding: 0.5rem 1.5rem;
+        color: $grey-darker;
+        border: solid 1px $grey-darker;
+        border-radius: 100px;
+        font-weight: 500;
+        line-height: 0.8;
+        min-width: 9rem;
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+
+.fave-note__fave {
+    padding: 2rem 2rem;
+    .header-icon {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $grey-light;
+        border-radius: 100%;
+        cursor: pointer;
+
+        .ionicons {
+            line-height: 3rem;
+        }
+    }
 }

@@ -54,6 +54,10 @@
     }
 
     &.note-form__subject {
+
+        .select {
+            min-width: 13rem;
+        }
         
         .note-form__label {
             font-size: $font-size-xxs;
@@ -64,7 +68,6 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        padding-right: 2rem;
         line-height: 1.5;
         font-size: $font-size-xxs;
     }

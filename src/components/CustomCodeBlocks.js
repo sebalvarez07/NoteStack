@@ -16,8 +16,7 @@ class CodeCustomBlock extends React.Component {
 
 const codeBlock = Immutable.Map({
     'unstyled': {
-      element: 'div',
-      aliasedElements: ['p'],
+      element: 'span'
     },
     'codeBlockJS': {
     element: 'span',

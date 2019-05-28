@@ -48,7 +48,7 @@ const RemoveNoteButton = (props) => {
 
                 <div className='modal__body'>
                     <span className='warning-icon'>
-                        <i class="ionicons ion-android-alert"></i>
+                        <i className="ionicons ion-android-alert"></i>
                     </span>
                     <div className='modal-remove__msg'>
                         <span className='d3'>
