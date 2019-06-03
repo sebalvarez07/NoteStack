@@ -6,6 +6,7 @@ import ToggleFontStyles from './ToggleFontStyle';
 import ToggleFontTypes from './ToggleFontType';
 import ToggleCodeHighlighters from './ToggleCodeHighlighters';
 import BlockIconUI from './BlockIconUI';
+import UndoRedo from './UndoRedo';
 
 const NoteUI = ({editorState, onChange }) => {
 
@@ -43,6 +44,8 @@ const NoteUI = ({editorState, onChange }) => {
                 )
             }) 
             }
+
+            <UndoRedo editorState={editorState} onChange={onChange} />
         </div>
     )
 };

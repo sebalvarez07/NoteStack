@@ -5,7 +5,7 @@ import getSubject from '../selectors/subjects';
 
 const NotesFilters = (props) => {
 
-    const [textSearch, setTextSearch] = useState('');
+    const [textSearch, setTextSearch] = useState(props.filters.text);
     const [isLatest, setIsLatest] = useState(true);
 
     const handleOnChangeText = (e) => {

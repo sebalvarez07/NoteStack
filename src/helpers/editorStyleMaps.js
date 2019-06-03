@@ -7,9 +7,9 @@ export const BLOCKTYPES = [
 export const FONTTYPES = [
     { label: 'Normal Text', style: 'unstyled' },
     { label: 'Title', style: 'header-two' },
-    { label: 'Heading 1', style: 'header-three' },
-    { label: 'Heading 2', style: 'header-four' },
-    { label: 'Heading 3', style: 'header-five' },
+    { label: 'Large Text', style: 'header-three' }, 
+    { label: 'Medium Text', style: 'header-four' },
+    { label: 'Small Text', style: 'header-five' },
 ];
 
 export const INLINETYPES = [
@@ -28,30 +28,48 @@ export const CODE_HIGHLIGHTERS = [
 
 export const colorStyleMap = {
     'RED': {
-        color: 'red'
+        color: '#e53f25'
     },
     'BLUE': {
-        color: 'blue'
+        color: '#4fa6ff'
     },
     'GREEN': {
-        color: 'green'
+        color: '#55e530'
     },
     'YELLOW': {
-        color: 'yellow'
+        color: '#ffcd29'
+    },
+    'PURPLE': {
+        color: '#b635ff'
+    },
+    'WHITE': {
+        color: 'white'
+    },
+    'BLACK': {
+        color: 'black'
     }
 };
 
 export const HighlighterStyleMap = {
     'RED_BG': {
-        backgroundColor: 'red'
+        backgroundColor: '#e53f25'
     },
     'BLUE_BG': {
-        backgroundColor: 'blue'
+        backgroundColor: '#4fa6ff'
     },
     'GREEN_BG': {
-        backgroundColor: 'green'
+        backgroundColor: '#55e530'
     },
     'YELLOW_BG': {
-        backgroundColor: 'yellow'
+        backgroundColor: '#ffcd29'
+    },
+    'PURPLE_BG': {
+        backgroundColor: '#b635ff'
+    },
+    'WHITE_BG': {
+        backgroundColor: 'white'
+    },
+    'WHITE_BLACK': {
+        backgroundColor: 'black'
     }
 };

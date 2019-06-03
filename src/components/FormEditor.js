@@ -1,24 +1,24 @@
 import React from 'react';
-import Draft, { Editor, RichUtils } from 'draft-js';
-import { colorStyleMap, HighlighterStyleMap } from '../helpers/editorStyleMaps';
+import Draft, { Editor, RichUtils, Modifier, EditorState } from 'draft-js';
+import { colorStyleMap, HighlighterStyleMap, FontSizesStyleMap } from '../helpers/editorStyleMaps';
 import CodeUtils from 'draft-js-code';
 import extendedBlockRenderMap from './CustomCodeBlocks';
 import { registerCopySource, handleDraftEditorPastedText} from "draftjs-conductor";
 
 class FormEditor extends React.Component {
 
-    componentDidMount() {
+ componentDidMount() {
         this.copySource = registerCopySource(this.editorRef);
     }
 
-    componentWillUnmount() {
+ componentWillUnmount() {
         if (this.copySource) {
           this.copySource.unregister();
-        }
-      }
+     }
+ }
 
-    handleKeyCommand = (command) => {
-        
+ handleKeyCommand = (command) => {
+ 
         const editorState = this.props.editorState;
 
         let newState;
@@ -38,26 +38,33 @@ class FormEditor extends React.Component {
         return 'not-handled';
     };
 
-    keyBindingFn = (evt) => {
+ keyBindingFn = (evt) => {
         const editorState = this.props.editorState;
         // if (!CodeUtils.hasSelectionInBlock(editorState)) return Draft.getDefaultKeyBinding(evt);
 
         const command = CodeUtils.getKeyBinding(evt);
-
         return command || Draft.getDefaultKeyBinding(evt);
     }
 
-    handleReturn = (evt) => {
-        const editorState = this.props.editorState;
-        // if (!CodeUtils.hasSelectionInBlock(editorState)) return 'not-handled';
+ handleReturn = (evt) => {
+    const editorState = this.props.editorState;
+    const curInlineStyle = editorState.getCurrentInlineStyle(); 
+    let nextState;
+    
+    if(evt.shiftKey || evt.ctrlKey || evt.altKey){
+        
+        nextState = CodeUtils.handleReturn(evt, editorState);
 
-        if(evt.shiftKey || evt.ctrlKey || evt.altKey){
-            this.props.onChange(CodeUtils.handleReturn(evt, editorState));
-            return 'handled';
-        }
+        /* If there is a current font size being applied */
+        curInlineStyle.forEach(style => {
+            nextState = RichUtils.toggleInlineStyle(nextState, style);  
+        })
+        this.props.onChange(nextState);
+        return 'handled';
     }
+}
 
-    onTab = (evt) => {
+ onTab = (evt) => {
         const editorState = this.props.editorState;
         // if (!CodeUtils.hasSelectionInBlock(editorState)) return 'not-handled';
 
@@ -75,7 +82,7 @@ class FormEditor extends React.Component {
         return 'handled';
     }   
 
-    handlePastedText = (text, html) => {
+ handlePastedText = (text, html) => {
         let newState = handleDraftEditorPastedText(html, this.props.editorState);
 
         if (newState) {
@@ -85,23 +92,23 @@ class FormEditor extends React.Component {
 
         return false;
     }
-    render() {
+ render() {
         return (
-            <div className='wysiwyg-editor'>
-                <Editor 
-                    handleReturn={this.handleReturn}
-                    keyBindingFn={this.keyBindingFn}
-                    editorState={this.props.editorState} 
-                    onChange={this.props.onChange} 
-                    customStyleMap={{...colorStyleMap, ...HighlighterStyleMap}}
-                    keyBindingFn={this.keyBindingFn}
-                    handleKeyCommand={this.handleKeyCommand}
-                    onTab={this.onTab}
-                    blockRenderMap={extendedBlockRenderMap}
-                    ref={(ref) => this.editorRef = ref }
-                    handlePastedText={this.handlePastedText}
-                />
-            </div>
+         <div className='wysiwyg-editor'>
+             <Editor 
+             handleReturn={this.handleReturn}
+             keyBindingFn={this.keyBindingFn}
+             editorState={this.props.editorState} 
+             onChange={this.props.onChange} 
+             customStyleMap={{...colorStyleMap, ...HighlighterStyleMap}}
+             keyBindingFn={this.keyBindingFn}
+             handleKeyCommand={this.handleKeyCommand}
+             onTab={this.onTab}
+             blockRenderMap={extendedBlockRenderMap}
+             ref={(ref) => this.editorRef = ref }
+             handlePastedText={this.handlePastedText}
+             />
+         </div>
         )
     }
 }

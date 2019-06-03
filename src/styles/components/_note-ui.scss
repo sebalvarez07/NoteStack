@@ -158,6 +158,14 @@
         transform: scale(1);
         transition: all 0.5s ease;
 
+        &.WHITE, &.WHITE_BG {
+            border: solid 2px $grey-light;
+
+            .ionicons {
+                color: $grey;
+            }
+        }
+
         .ionicons {
             color: $white;
         }
@@ -168,7 +176,10 @@
             transform: scale(1.2);
         }
     }
+}
 
+.undo-redo {
+    
 }
 
 .ui-icon__container {

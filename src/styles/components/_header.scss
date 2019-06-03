@@ -4,14 +4,16 @@
 }
 
 .header-wrapper {
-    transition: all 0.5s ease;
-    width: inherit;
+    width: 100%;
     position: fixed;
     top: 0;
     right: 0;
     z-index: 10;
     background: $grey-light;
     transition: all 0.5s ease;
+    @include breakpoint(lg) {
+        width: calc(100% - 38.5rem);
+    }
 }
 
 .header-wrapper {

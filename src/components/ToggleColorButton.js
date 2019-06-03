@@ -43,7 +43,7 @@ const ToggleColorButton = (props) => {
 
                                         style={ 
                                             props.className === 'color__icon--text' ?  
-                                                props.currentInlineStyle.has(color) ? { backgroundColor: color } : {}
+                                                props.currentInlineStyle.has(color) ? { backgroundColor: props.StyleMap[color].color } : {}
                                             : 
                                                 props.currentInlineStyle.has(color) ? { backgroundColor: props.StyleMap[color].backgroundColor } : {}
                                         }
@@ -53,11 +53,11 @@ const ToggleColorButton = (props) => {
                                         <span     
                                             style={ 
                                                 props.className === 'color__icon--text' ?  
-                                                    { backgroundColor: color } 
+                                                    { backgroundColor: props.StyleMap[color].color } 
                                                 : 
                                                     { backgroundColor: props.StyleMap[color].backgroundColor }
                                             }
-                                            className={'icon-color'}
+                                            className={`icon-color ${color}`}
                                             >
                                             { props.currentInlineStyle.has(color) && <i className="ionicons ion-checkmark"></i> }
                                         </span>                

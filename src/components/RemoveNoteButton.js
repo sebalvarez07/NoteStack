@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import { connect } from 'react-redux';
 import { startRemoveNote } from '../actions/notes';
+import {  setHeaderToNotCollapsed } from '../actions/collapsers';
 import { history } from '../routers/AppRouter';
 
 ReactModal.setAppElement('#app');
@@ -79,7 +80,12 @@ const RemoveNoteButton = (props) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    startRemoveNote: (id) => dispatch(startRemoveNote(id))
-})
+    startRemoveNote: (id) => dispatch(startRemoveNote(id)),
+    setHeaderToNotCollapsed: () => dispatch(setHeaderToNotCollapsed())
+});
 
-export default connect(undefined, mapDispatchToProps)(RemoveNoteButton);
+const mapStateToProps = (state) => ({
+    headerCollapsed: state.collapseStatus.headerCollapsed
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RemoveNoteButton);

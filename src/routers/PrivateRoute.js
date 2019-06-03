@@ -1,21 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
-import { setSidebarToCollapsed } from '../actions/collapsers';
+import { setSidebarToCollapsed, setHeaderToNotCollapsed } from '../actions/collapsers';
 
-export const PrivateRoute = ({ isAuthenticated, component: Component, ...rest }) => {
+export class PrivateRoute extends React.Component {
 
-    useEffect(()=>{
+    componentDidMount () {
         if(window.innerWidth < 1200 ){
-            rest.setSidebarToCollapsed();
+            this.props.setSidebarToCollapsed();
         }
-    }, []);
+    }
+    
+    componentDidUpdate () {
+        this.props.setHeaderToNotCollapsed();
+    }
 
+    shouldComponentUpdate(nextProps) {
+        if(this.props.sidebarCollapsed !== nextProps.sidebarCollapsed) {
+            document.getElementById('wrapper').classList.toggle('sidebar-collapse');
+            return false;
+        }
+        else if(this.props.headerCollapsed !== nextProps.headerCollapsed) {
+            document.getElementById('wrapper').classList.toggle('header-collapse');
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    render () {
+        const { isAuthenticated, component: Component, ...rest } = this.props;
         return (
             <Route {...rest} component={(props) => (
                 isAuthenticated ? (
-                    <div className={`wrapper ${ rest.sidebarCollapsed ? 'sidebar-collapse' : '' } ${ rest.headerCollapsed ? 'header-collapse' : '' }` }>
+                    <div 
+                        id='wrapper' 
+                        className={`wrapper ${ rest.sidebarCollapsed ? 'sidebar-collapse' : '' } ${ rest.headerCollapsed ? 'header-collapse' : '' }` }>
                         <Sidebar />
                         { !rest.sidebarCollapsed && <div className='sidebar-overlay--mobile'></div> }
                         <div className='content-page'>
@@ -28,7 +50,8 @@ export const PrivateRoute = ({ isAuthenticated, component: Component, ...rest })
             )}/>
         )
     }
-;
+}
+
 
 const mapStateToProps = (state) => ({
     isAuthenticated: !!state.auth.uid,
@@ -37,7 +60,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    setSidebarToCollapsed: () => dispatch(setSidebarToCollapsed())
+    setSidebarToCollapsed: () => dispatch(setSidebarToCollapsed()),
+    setHeaderToNotCollapsed: () => dispatch(setHeaderToNotCollapsed())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute);

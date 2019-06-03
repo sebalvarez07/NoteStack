@@ -24,13 +24,12 @@
         border: 0;
         font-size: 1.8rem;
         color: $grey-text;
-        font-weight: 200;
+        font-weight: 500;
         letter-spacing: .2rem;
         
 
         &::-webkit-input-placeholder, &:-ms-input-placeholder, &::placeholder, &:-moz-placeholder {
             color: $grey!important;
-            font-weight: 200!important; 
           }
 
         &:focus, &:active {

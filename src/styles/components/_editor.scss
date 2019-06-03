@@ -1,15 +1,24 @@
 .wysiwyg-editor {
     height: auto;
     background: $white; 
-    padding: 2.5rem;
+    padding: 5rem;
 }
 
 .DraftEditor-root {
     color: $grey-darker;
     font-weight: 500;
+    font-size: $font-size-xs;
     
-    .DraftEditor-editorContainer > * {   
+    .DraftEditor-editorContainer > * {
         min-height: 100vh;
+    }
+
+    pre {
+        font-size: 1.6rem!important;
+    }
+
+    ul, ol {
+        padding-left: 2rem;
     }
 
     blockquote {
@@ -21,15 +30,16 @@
         font-family: $font-fency;
     }
 
-    h2, h3, h4 {
+    h2, h3, h4, h5 {
         color: $grey-darker;
-        font-weight: 700;
+        font-weight: 500;
     }
 
     h2 {
         font-size: $font-size-xl;
-        line-height: 1;
-        margin-bottom: 2rem;
+        line-height: 1.4;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
     }
 
     h3 {
@@ -38,6 +48,10 @@
 
     h4 {
         font-size: $font-size-md;
+    }
+
+    h5 {
+        font-size: $font-size-xxs;
     }
 }
 
