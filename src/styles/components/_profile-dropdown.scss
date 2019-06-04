@@ -5,7 +5,7 @@
  .profile-dropdown__options {
      position: absolute;
      right: 0;
-     bottom: -3.6rem;
+     bottom: -1px;
      width: 16rem;
      list-style: none;
      visibility: visible;
@@ -25,15 +25,18 @@
      background: $white;
 
     .profile-dropdown__logout {
-        background: $white;
-        padding: $s-size;
+        background: $blue;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         box-shadow: none;
         outline: none;
         border: none;
         margin: 0;
         line-height: 1;
         font-weight: 500;
-        color: $grey-darker;
+        color: $white;
         transition: all 0.5s ease;
         width: 100%;
         text-align: center;

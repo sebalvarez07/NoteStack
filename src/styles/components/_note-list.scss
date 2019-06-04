@@ -12,6 +12,14 @@
             background: $grey-light;
         }
     }
+
+    &.active {
+        background: $grey-light;
+        .preview-single__controls {
+            transform: translateX(0);
+            background: $grey-light;
+        }
+    }
 }
 
 .preview-single__container {

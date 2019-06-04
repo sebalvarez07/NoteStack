@@ -3,13 +3,14 @@ import moment from 'moment';
 import { Link }  from 'react-router-dom';
 import FavouriteNoteButton from './FavouriteNoteButton';
 import RemoveNoteButton from './RemoveNoteButton';
+import { history } from '../routers/AppRouter';
 
 const NoteListItem = ({note}) => {
 
     const date = moment(note.dateCreated).format('MMM-DD-YYYY').split('-');
+    const historyID = history.location.pathname.split('/')[2];
 
     const limitTitleChar = () => {
-
         const charLimit = 25;
         const strArr = note.title.split(' ');
         const reduced = strArr.reduce((acc, current) => {
@@ -24,7 +25,7 @@ const NoteListItem = ({note}) => {
     }
 
     return (
-        <div className='preview-single'>
+        <div className={`preview-single ${historyID === note.id ? 'active' : ''}`}>
             <div className='preview-single__container'>
                 <Link
                     to={`/edit/${note.id}`}

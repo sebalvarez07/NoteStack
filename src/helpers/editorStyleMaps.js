@@ -48,7 +48,7 @@ export const colorStyleMap = {
     'BLACK': {
         color: 'black'
     }
-};
+}; 
 
 export const HighlighterStyleMap = {
     'RED_BG': {
