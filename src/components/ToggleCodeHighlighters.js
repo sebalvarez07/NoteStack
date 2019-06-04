@@ -12,7 +12,7 @@ const ToggleCodeHighlights = (props) => {
                 onMouseDown={ e => setDropdownState(!dropDownState) }
                 className='flex-middle'
             >
-                <img className='block-UI__icon-svg' src={`/images/UI-icons/CODE.svg`}/>
+                <img className='block-UI__icon-svg' src={`/images/UI-icons/code.svg`}/>
             </span>
             { dropDownState && 
                 <div className='dropdown__options'>
