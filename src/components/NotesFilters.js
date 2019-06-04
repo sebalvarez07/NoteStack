@@ -46,7 +46,7 @@ const NotesFilters = (props) => {
                 </label>
             </div>
             <div className='flexer space-between'>
-                <div className='input-search__filter'>
+                <div className='input-search__filter input-search__filter--select'>
                     <select 
                         className='input-select' 
                         value={props.filters.subject} 
@@ -57,6 +57,7 @@ const NotesFilters = (props) => {
                                 props.subjects.map(subject => <option key={subject} value={subject}>{subject}</option>)                                       
                             }
                     </select>
+                    <i class="ionicons ion-chevron-down"></i>
                 </div>
                 <div className='input-search__filter'>
                     <button 

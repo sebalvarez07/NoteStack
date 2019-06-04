@@ -39,16 +39,42 @@
         }
     }
 }
-
+ 
 .input-search__filter {
+    position: relative;
+
+    &.input-search__filter--select {
+        padding-right: 3rem;
+    }
+
+    .ionicons {
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        color: $grey-darker;
+        z-index: 0;
+        font-size: 1.2rem;
+        transform: translateY(-35%);
+    }
+
+    .input-select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        line-height: 1.5;
+        background: none;
+        outline: none;
+        box-shadow: none;
+    }
+
     .input-select, .btn-filter {
         font-size: $font-size-xxs;
         color: $grey-text;
         background: none;
         border: none;
         letter-spacing: 0.15rem;
-        font-weight: 500;
-
+        font-weight: 500; 
+        
         &:focus, &:active {
             outline: none;
         }

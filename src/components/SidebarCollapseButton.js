@@ -14,11 +14,11 @@ const SidebarCollapseButton = (props) => {
     };
 
     return (
-        <button 
-            onClick={handleSidebarCollapse}
-            className='sidebar-collapser__btn h-border-sides'>
+        <span 
+            onMouseDown={handleSidebarCollapse}
+            className='sidebar-collapser__btn h-border-sides cursor-pointer'>
             { props.sidebarCollapsed ? <i className="ionicons ion-search"></i> : <i className="ionicons ion-chevron-left"></i> }
-        </button>
+        </span>
     );
 }
 

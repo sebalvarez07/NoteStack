@@ -14,9 +14,9 @@ const HeaderCollapseButton = (props) => {
     };
 
     return (
-        <button 
-            onClick={handleHeaderCollapse}
-            className='h-border-sides h-w80 flex-middle header-icon header-icon--xs'>
+        <span 
+            onMouseDown={handleHeaderCollapse}
+            className='cursor-pointer h-border-sides h-w80 flex-middle header-icon header-icon--xs'>
             {
                 props.headerCollapsed ? 
                 <i className="ionicons ion-chevron-down"></i>
@@ -24,7 +24,7 @@ const HeaderCollapseButton = (props) => {
                 <i className="ionicons ion-chevron-up"></i>
             }
             
-        </button>
+        </span>
     );
 }
 
