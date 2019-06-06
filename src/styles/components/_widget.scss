@@ -1,10 +1,10 @@
-.welcome-widget {
-    width: 34rem;
+.msg-widget {
+    width: 38rem;
     padding: 3rem 5rem;
     text-align: center;
     margin: 0 auto;
 
-    .welcome__title {
+    .msg__title {
         font-family: $font-welcome;
         font-size: $font-size-lg;
         color: $grey-darker;
@@ -12,21 +12,15 @@
         font-style: italic;
     }
 
-    .welcome__note-count{
+    .msg__msg{
         display: inline-block;
         font-size: $font-size-sm;
         margin: 0;
         margin-bottom: 2rem;
     }
 
-    .welcome__image {
-        width: 24rem;
-        display: inline-block;
-        margin-bottom: 2rem;
-    }
-
-    .welcome__ready {
-        font-size: $font-size-xxs;
+    .msg__image {
+        width: 20rem;
         display: inline-block;
         margin-bottom: 2rem;
     }

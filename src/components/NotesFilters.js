@@ -57,7 +57,7 @@ const NotesFilters = (props) => {
                                 props.subjects.map(subject => <option key={subject} value={subject}>{subject}</option>)                                       
                             }
                     </select>
-                    <i class="ionicons ion-chevron-down"></i>
+                    <i className="ionicons ion-chevron-down"></i>
                 </div>
                 <div className='input-search__filter'>
                     <button 
